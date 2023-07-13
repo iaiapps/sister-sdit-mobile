@@ -1,5 +1,5 @@
 <template>
-    <div class="container vh-100">
+    <div class="container">
         <TimeComponent />
         <img src="@/assets/img/logo.svg" alt="logo" class="bg-success p-1 mt-2 logo-app" />
 
@@ -18,25 +18,29 @@
             </button>
         </div>
 
-        <div class="bg-white mt-3 text-center p-3 rounded shadow bottom">
+        <div class="bg-white mt-3 text-center p-3 rounded shadow mbottom">
             <p class="fs-5">
                 Catatan: Ijin, Sakit, atau Tugas Kedinasan
             </p>
             <div class="mb-3">
-                <select class="form-select">
+                <select class="form-select" v-model="selected">
                     <option disabled value="">Pilih salah satu</option>
                     <option value="sakit">Sakit</option>
                     <option value="ijin">Ijin</option>
                     <option value="Tugas kedinasan">Tugas Kedinasan</option>
                 </select>
+
+                <div v-if="selected" class="mt-3">
+                    <label for="kedinasan" class="form-label">Isi keterangan tugas kedinasannya</label>
+                    <input id="kedinasan" type="text" class="form-control ">
+                </div>
             </div>
             <button class="btn btn-success" v-on:click="postSelectedItem()">
                 KIRIM DATA
             </button>
         </div>
-        <div class="kosong"></div>
-    </div>
 
+    </div>
 </template>
 
 <style>
@@ -55,28 +59,18 @@
 .top {
     margin-top: 50px !important;
 }
-
-.menus {
-    height: 130px;
-}
-
-.menu {
-    display: block;
-    width: 100%;
-}
-
-.menu img {
-    width: 30px;
-}
-
-.menu a {
-    width: 100%;
-    height: 80px;
-}
 </style>
 
 <script setup>
 import TimeComponent from '@/components/TimeComponent.vue';
+import { ref } from 'vue';
+
+const selected = ref();
+const select = () => {
+    if (selected.value == 'Tugas kedinasan')
+        selected.value = true
+}
+select()
 
 
 </script>
