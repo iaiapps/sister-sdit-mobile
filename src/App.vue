@@ -3,6 +3,7 @@
         <router-view v-bind:localData="localData" v-on:menuEnable="menuEnable" v-bind:url="url"
             v-on:emitLocalData="getLocalData">
         </router-view>
+        <div class="kosong"></div>
         <MenuComponent v-if="menu" v-bind:localData="localData" v-on:menuDisable="menuDisable" v-bind:url="url">
         </MenuComponent>
     </div>
@@ -19,8 +20,8 @@
     padding-top: 12px;
 }
 
-.mbottom {
-    margin-bottom: 100px !important;
+.kosong {
+    height: 90px;
 }
 </style>
 
@@ -33,15 +34,15 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 
 //url
-const url = ref('http://127.0.0.1:8000/api')
+// const url = ref('http://127.0.0.1:8000/api')
+const url = ref('http://192.168.74.241:8000/api') //my local ip adress 
+// const url = ref('http://sister.sditharum.id:8000/api') //sister ip adress 
 
 //variabel local data
 const localData = ref()
 //get localstorage data
 const getLocalData = () => {
     localData.value = JSON.parse(localStorage.getItem("localDataSave"));
-    // token.value = localData.value.access_token
-    // teacher_id.value = localData.value.data.id
 }
 
 //variable menu
@@ -56,7 +57,6 @@ const menuEnable = (val) => {
 
 //check login
 const checkPageLogin = () => {
-    // getLocalData()
     if (localData.value == null) {
         router.push({ path: '/' })
         menu.value = false

@@ -3,7 +3,7 @@
         <div class="bg-white text-center p-3 shadow rounded">
             <h1 class="fs-5 my-0">REKAP SLIP GAJI</h1>
         </div>
-        <!-- <div class="bg-white text-center p-3 shadow rounded mt-3">
+        <div class="bg-white text-center p-3 shadow rounded mt-3">
             <label for="date" class="form-label">Pilih Bulan & Tahun </label>
             <div class="row">
                 <div class="col-8">
@@ -13,9 +13,9 @@
                     <button v-on:click="getData" type="submit" class="btn btn-success w-100">submit</button>
                 </div>
             </div>
-        </div> -->
+        </div>
 
-        <div v-if="show" class="bg-white mt-3 p-3 shadow table-responsive rounded mbottom">
+        <div v-if="show" class="bg-white mt-3 p-3 shadow table-responsive rounded">
             <div id="printarea">
                 <div class="text-center">
                     <img src="@/assets/img/kop.svg" class="kop mb-2" alt="kop">
@@ -23,7 +23,7 @@
                     <p class="mb-2">Bulan : {{ data ? new Date(data.bulan).toLocaleDateString("id-ID", {
                             month: "long",
                             year: "numeric",
-                        }).split('T')[0] : ''
+                        }) : ''
                     }} </p>
                 </div>
 
@@ -167,13 +167,18 @@
                                 </tr>
                                 <tr>
                                     <td class="fw-bold">Gaji yang diterima</td>
-                                    <td class="fs-4 text-end fw-bold">Rp. {{ data ? data.total : '' }}</td>
+                                    <td class="fs-5 text-end fw-bold">{{ data ? new Intl.NumberFormat("id-ID", {
+                                            style: 'currency',
+                                            currency: 'IDR',
+                                            minimumFractionDigits: 0,
+                                        }).format(data.total) : ''
+                                    }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="col-12 col-md-6">
-                        <div class="boxttd mt-3 text-center position-relative clearfix">
+                        <div class="boxttd mt-2 text-center position-relative clearfix">
                             <p>Jember, {{ data ? new Date(data.bulan).toLocaleDateString("id-ID", {
                                     day: "numeric",
                                     month: "long",
@@ -190,7 +195,7 @@
             </div>
         </div>
         <div v-else class="p-3 bg-white text-center mt-3 rounded shadow">
-            <p class="fs-5 m-0">Data Gaji bulan ini belum tersedia</p>
+            <p class="fs-5 m-0">Data slip gaji belum tersedia</p>
         </div>
     </div>
 </template>
@@ -200,14 +205,15 @@
     width: 80px;
 }
 
-
 .kop {
-    width: 300px;
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .imgttd {
     position: absolute;
-    top: 30px;
+    top: 10px;
     left: 0;
     right: 0;
 }
@@ -224,41 +230,17 @@ import axios from 'axios';
 const props = defineProps({
     url: String,
     localData: Object,
-
 })
 
+// const curency = new Intl.NumberFormat("id-ID", {
+//     style: "currency",
+//     currency: "IDR",
+// });
+
 const name = ref(props.localData.data.name)
-// const date = ref()
+const date = ref()
 
-// let objectDate = new Date();
-
-// let day = objectDate.getDate();
-// console.log(day); // 23
-
-// let month = (objectDate.getMonth() + 1).toString().padStart(2, "0");
-// console.log(month); // 8
-
-// let year = objectDate.getFullYear();
-// console.log(year); // 2022
-
-// let format3 = (year + "-" + month + "-" + day);
-// console.log(format3);
-
-const date = new Date().toISOString().split('T')[0]
-
-// const date = new Date(props.localData.data.created_at).toLocaleDateString("id-ID", {
-//     day: "numeric",
-//     month: "numeric",
-//     year: "numeric",
-// })
-
-// const tanggal = ref(date)
-// console.log(tanggal.value)
-
-// const getData = () => {
-//     console.log(date.value)
-// }
-
+/// const date = new Date().toISOString().split('T')[0]
 
 const show = ref()
 const data = ref()
@@ -269,7 +251,6 @@ const checkShow = () => {
     } else {
         show.value = true
     }
-
 }
 
 const axiosDefaultHeader = () => {
@@ -277,25 +258,23 @@ const axiosDefaultHeader = () => {
 }
 
 const getData = () => {
-    // console.log(date.value)
     axiosDefaultHeader()
     // axios.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-    axios.get(`${props.url}/salary/${props.localData.teacher_id}?date=${date}`)
+    axios.get(`${props.url}/salary/${props.localData.teacher_id}?date=${date.value}`)
         .then((result) => {
             data.value = result.data.data;
             console.log(data.value);
             checkShow()
-
         })
         .catch((error) => {
-            console.log(error);
+            console.log(error.response.statusText);
+            show.value = false
         });
 }
 
 onMounted(() => {
     checkShow();
-    getData();
+    // getData();
 })
-
 
 </script>

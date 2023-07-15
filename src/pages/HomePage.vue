@@ -18,7 +18,7 @@
             </button>
         </div>
 
-        <div class="bg-white mt-3 text-center p-3 rounded shadow mbottom">
+        <div class="bg-white mt-3 text-center p-3 rounded shadow">
             <p class="fs-5">
                 Catatan: Ijin, Sakit, atau Tugas Kedinasan
             </p>
@@ -30,9 +30,9 @@
                     <option value="Tugas kedinasan">Tugas Kedinasan</option>
                 </select>
 
-                <div v-if="selected" class="mt-3">
+                <div v-if="selected == 'Tugas kedinasan'" class="mt-3">
                     <label for="kedinasan" class="form-label">Isi keterangan tugas kedinasannya</label>
-                    <input id="kedinasan" type="text" class="form-control ">
+                    <input v-model="kedinasan" id="kedinasan" type="text" class="form-control ">
                 </div>
             </div>
             <button class="btn btn-success" v-on:click="postSelectedItem()">
@@ -62,15 +62,105 @@
 </style>
 
 <script setup>
+import axios from 'axios';
 import TimeComponent from '@/components/TimeComponent.vue';
-import { ref } from 'vue';
+import { ref, defineProps, onMounted, defineEmits, onBeforeMount } from 'vue';
+
+const props = defineProps({
+    url: String,
+    localData: Object,
+})
 
 const selected = ref();
 const select = () => {
-    if (selected.value == 'Tugas kedinasan')
+    if (selected.value == 'Tugas kedinasan') {
         selected.value = true
+        console.log(selected.value)
+    } else {
+        selected.value = false
+    }
 }
-select()
+const kedinasan = ref();
+
+const axiosDefaultHeader = () => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${props.localData.access_token}`;
+}
+
+const postData = () => {
+    axiosDefaultHeader();
+    axios.post(`${props.url}/presence`, {
+        teacher_id: props.localData.teacher_id,
+        // teacher_id: 1,
+    }).then((result) => {
+        // console.log(result.data.pesan);
+        const pesan = result.data.pesan;
+        alert(`${pesan}`);
+    }).catch((err) => {
+        // console.log(err.response.data.pesan);
+        const pesan = err.response.data.pesan;
+        alert(`${pesan}`);
+    });
+}
+
+const scan = () => {
+    const result = (result) => {
+        const hasilScan = result.text;
+        if (hasilScan === props.localData.qrcode) {
+            postData();
+        } else {
+            alert("data QR tidak sama");
+        }
+    };
+    const err = (err) => {
+        alert("scan QR: " + err);
+    };
+    const options = {
+        preferFrontCamera: false,
+        saveHistory: false,
+        prompt: "Tempatkan QRCODE pada area tengah scanner",
+        resultDisplayDuration: 0,
+        formats: "QR_CODE,EAN_13,DATA_MATRIX",
+
+    };
+    window.cordova.plugins.barcodeScanner.scan(result, err, options);
+}
+
+const postSelectedItem = () => {
+    if (selected.value == "") {
+        alert("catatan belum dipilih !");
+    } else {
+        axiosDefaultHeader();
+        axios.post(`${props.url}/presence`, {
+            teacher_id: props.localData.teacher_id,
+            note: selected.value,
+            description: kedinasan.value
+        }).then((result) => {
+            const pesan = result.data.pesan;
+            selected.value = false
+            alert(pesan);
+        }).catch((error) => {
+            console.log(error);
+            // alert(error.response.data);
+        });
+    }
+}
+
+const emit = defineEmits([
+    'emitLocalData'
+])
+
+const emitlocalData = () => {
+    emit('emitLocalData')
+}
+
+onBeforeMount(() => {
+    emitlocalData()
+})
+
+onMounted(() => {
+    select()
+    emitlocalData()
+})
 
 
 </script>
