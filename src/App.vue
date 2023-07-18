@@ -35,8 +35,8 @@ const router = useRouter()
 
 //url
 // const url = ref('http://127.0.0.1:8000/api')
-const url = ref('http://192.168.74.241:8000/api') //my local ip adress 
-// const url = ref('http://sister.sditharum.id:8000/api') //sister ip adress 
+// const url = ref('http://192.168.74.241:8000/api') //my local ip adress 
+const url = ref('http://sister.sditharum.id:8000/api') //sister ip adress 
 
 //variabel local data
 const localData = ref()

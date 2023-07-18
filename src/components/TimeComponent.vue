@@ -51,11 +51,9 @@ time();
 const check = () => {
     status.value = navigator.onLine;
     window.addEventListener("online", () => {
-        //   console.log("online");
         status.value = true;
     });
     window.addEventListener("offline", () => {
-        //   console.log("offline");
         status.value = false;
     });
 };

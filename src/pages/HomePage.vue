@@ -5,7 +5,7 @@
 
         <div class="bg-white text-center p-3 top shadow rounded ">
             <p class="my-1 mt-4">Assalamualaikum Wr. Wb.</p>
-            <p class="fs-5 mb-1"><b>Teacher Name</b></p>
+            <p class="fs-5 mb-1"><b>{{ props.localData.data.name }}</b></p>
         </div>
 
         <div class="bg-white mt-3 text-center p-3 rounded shadow">
@@ -75,7 +75,7 @@ const selected = ref();
 const select = () => {
     if (selected.value == 'Tugas kedinasan') {
         selected.value = true
-        console.log(selected.value)
+        // console.log(selected.value)
     } else {
         selected.value = false
     }

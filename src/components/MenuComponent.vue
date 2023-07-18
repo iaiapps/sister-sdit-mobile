@@ -53,7 +53,6 @@ const axiosDefaultheader = () => {
 
 const deleteLocalData = () => {
     localStorage.clear();
-    // console.log(`Bearer ${token.value}`)
 }
 
 const menu = () => {
@@ -67,7 +66,6 @@ const logout = () => {
         axios.post(`${props.url}/logout`)
             .then((result) => {
                 // this.items = result;
-                // console.log('logout');
                 console.log(result);
             })
             .catch((error) => {

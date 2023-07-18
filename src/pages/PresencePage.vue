@@ -61,7 +61,7 @@ const getData = () => {
     axios.get(`${props.url}/presence/${props.localData.teacher_id}`)
         .then((result) => {
             data.value = result.data.data;
-            console.log(data.value);
+            // console.log(data.value);
         })
         .catch((error) => {
             console.log(error);
@@ -81,6 +81,5 @@ onMounted(() => {
 
 onBeforeMount(() => {
     getData()
-    console.log('before')
 })
 </script>

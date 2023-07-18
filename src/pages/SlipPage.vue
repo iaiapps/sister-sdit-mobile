@@ -263,7 +263,7 @@ const getData = () => {
     axios.get(`${props.url}/salary/${props.localData.teacher_id}?date=${date.value}`)
         .then((result) => {
             data.value = result.data.data;
-            console.log(data.value);
+            // console.log(data.value);
             checkShow()
         })
         .catch((error) => {
