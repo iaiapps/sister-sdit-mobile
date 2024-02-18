@@ -19,13 +19,15 @@
     "plugins": {
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-enable-cleartext-traffic": {},
-      "cordova-plugin-network-information": {}
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-inappbrowser": {}
     }
   },
   "devDependencies": {
     "add": "^2.0.6",
     "cordova-android": "^12.0.0",
     "cordova-plugin-enable-cleartext-traffic": "^2.1.0",
+    "cordova-plugin-inappbrowser": "^6.0.0",
     "cordova-plugin-network-information": "^3.0.0",
     "phonegap-plugin-barcodescanner": "github:phonegap/phonegap-plugin-barcodescanner"
   }

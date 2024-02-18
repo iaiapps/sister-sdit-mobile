@@ -7,7 +7,6 @@
         <MenuComponent v-if="menu" v-bind:localData="localData" v-on:menuDisable="menuDisable" v-bind:url="url">
         </MenuComponent>
     </div>
-
 </template>
 <style>
 .bg-img {
@@ -35,11 +34,12 @@ const router = useRouter()
 
 //url
 // const url = ref('http://127.0.0.1:8000/api')
-// const url = ref('http://192.168.74.241:8000/api') //my local ip adress 
-const url = ref('http://sister.sditharum.id:8000/api') //sister ip adress 
+const url = ref('http://192.168.82.241:8000/api') //my local ip adress 
+// const url = ref('http://sister.sditharum.id:8000/api') //sister ip adress 
 
 //variabel local data
 const localData = ref()
+
 //get localstorage data
 const getLocalData = () => {
     localData.value = JSON.parse(localStorage.getItem("localDataSave"));

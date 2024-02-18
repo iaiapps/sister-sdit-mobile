@@ -3,7 +3,8 @@ import { createWebHashHistory, createRouter } from "vue-router";
 // import LoginPage from "@/pages/LoginPage.vue";
 import HomePage from "@/pages/HomePage.vue";
 import PresencePage from "@/pages/PresencePage.vue";
-import SlipPage from "@/pages/SlipPage.vue";
+// import SlipPage from "@/pages/SlipPage.vue";
+import AppPage from "@/pages/AppPage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
 
 const routes = [
@@ -23,10 +24,15 @@ const routes = [
     name: "PresencePage",
     component: PresencePage,
   },
+  // {
+  //   path: "/slippage",
+  //   name: "SlipPage",
+  //   component: SlipPage,
+  // },
   {
-    path: "/slippage",
-    name: "SlipPage",
-    component: SlipPage,
+    path: "/apppage",
+    name: "AppPage",
+    component: AppPage,
   },
 ];
 

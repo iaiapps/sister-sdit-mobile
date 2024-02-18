@@ -9,9 +9,13 @@
             <i class="bi bi-bar-chart-line-fill fs-5"></i>
             <span class="small d-block">Data</span>
         </router-link>
-        <router-link to="/slippage" class="btn btn-success btn-sm rounded-0">
+        <!-- <router-link to="/slippage" class="btn btn-success btn-sm rounded-0">
             <i class="bi bi-file-earmark-text-fill fs-5"></i>
             <span class="small d-block">Slip</span>
+        </router-link> -->
+        <router-link to="/apppage" class="btn btn-success btn-sm rounded-0">
+            <i class="bi bi-terminal-fill fs-5"></i>
+            <span class="small d-block">Apps</span>
         </router-link>
 
         <button v-on:click="logout" class="btn btn-success btn-sm rounded-0">
@@ -44,7 +48,6 @@ const emit = defineEmits([
     'menuDisable',
     // 'dataPresence',
 ])
-
 
 //axios default header
 const axiosDefaultheader = () => {

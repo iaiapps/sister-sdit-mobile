@@ -20,8 +20,8 @@
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="password"><i class="bi bi-key-fill"></i></span>
-                    <input v-model="password" type="password" class="form-control" placeholder="********"
-                        aria-label="email" aria-describedby="password">
+                    <input v-model="password" type="password" class="form-control" placeholder="********" aria-label="email"
+                        aria-describedby="password">
                 </div>
                 <button v-on:click="login" class="btn btn-success w-100 mt-2 mb-3">
                     LOGIN
@@ -32,7 +32,6 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <style scoped>
@@ -67,7 +66,7 @@ const menu = () => {
 //get link route
 const router = useRouter()
 const toHome = () => {
-    router.push({ path: '/homepage' })
+    router.go({ path: '/homepage' })
 }
 
 //login data
