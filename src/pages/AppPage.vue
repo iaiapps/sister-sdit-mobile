@@ -53,7 +53,7 @@
 
         <div class="modal fade " id="modalshow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1"
             aria-hidden="true">
-            <div class="modal-dialog vh-100">
+            <div class="modal-dialog vh-100 m-0 p-2">
                 <div class="modal-content height">
                     <div class="modal-header py-1">
                         <h1 class="modal-title fs-5">{{ title }}</h1>
@@ -75,7 +75,7 @@
 
 <style scoped>
 .height {
-    height: calc(100%);
+    height: 100%;
 }
 
 .iframee {

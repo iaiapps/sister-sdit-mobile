@@ -81,7 +81,7 @@ const axiosDefaultHeader = () => {
 // post data scan
 const postData = () => {
     axiosDefaultHeader();
-    axios.post(`${props.url}/presence`, {
+    axios.post(`${props.url}/api/presence`, {
         teacher_id: props.localData.teacher_id,
     }).then((result) => {
         const pesan = result.data.pesan;
@@ -121,7 +121,7 @@ const postSelectedItem = () => {
         alert("catatan belum dipilih !");
     } else {
         axiosDefaultHeader();
-        axios.post(`${props.url}/presence`, {
+        axios.post(`${props.url}/api/presence`, {
             teacher_id: props.localData.teacher_id,
             note: selected.value,
             description: kedinasan.value

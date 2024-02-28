@@ -3,7 +3,7 @@
         <div class="p-3">
             <div class="bg-white shadow p-3 rounded top">
                 <div v-if="failed" class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <span>Email atau Password Salah !</span>
+                    <span>{{ msg }}</span>
                     <button v-on:click="close" type="button" class="btn-close" data-bs-dismiss="alert"
                         aria-label="Close"></button>
                 </div>
@@ -74,11 +74,18 @@ const email = ref();
 const password = ref();
 
 
-//login failed
-const failed = ref();
+//handling error
+const failed = ref(false);
+const msg = ref()
 const errorCheck = () => {
-    if (failed.value == '401')
+    if (failed.value == 401) {
         failed.value = true
+        msg.value = 'Email atau Password Salah !'
+    } else if (failed.value == 0) {
+        failed.value = true
+        msg.value = 'Jaringan atau Server Bermasalah, Hubungi Admin ! !'
+    }
+
 }
 const close = () => {
     failed.value = false
@@ -92,9 +99,11 @@ const saveToLocal = () => {
 
 //function login
 const login = () => {
-    axios.post(`${props.url}/login`, {
+    axios.defaults.timeout = 10000;
+    axios.post(`${props.url}/api/login`, {
         email: email.value,
-        password: password.value
+        password: password.value,
+        crossDomain: true
     }).then(response => {
         console.log('berhasil login');
         loginData.value = response.data
@@ -102,8 +111,7 @@ const login = () => {
         toHome()
         menu()
     }).catch(error => {
-        console.log(error.response.status);
-        failed.value = error.response.status
+        failed.value = error.request.status
         errorCheck()
     });
 }

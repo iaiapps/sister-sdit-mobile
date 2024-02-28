@@ -66,7 +66,7 @@ const logout = () => {
     if (confirm("Apakah anda yakin untuk keluar ?") == true) {
         axiosDefaultheader();
         deleteLocalData();
-        axios.post(`${props.url}/logout`)
+        axios.post(`${props.url}/api/logout`)
             .then((result) => {
                 // this.items = result;
                 console.log(result);

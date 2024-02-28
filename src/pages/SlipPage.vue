@@ -260,7 +260,7 @@ const axiosDefaultHeader = () => {
 const getData = () => {
     axiosDefaultHeader()
     // axios.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-    axios.get(`${props.url}/salary/${props.localData.teacher_id}?date=${date.value}`)
+    axios.get(`${props.url}/api/salary/${props.localData.teacher_id}?date=${date.value}`)
         .then((result) => {
             data.value = result.data.data;
             // console.log(data.value);

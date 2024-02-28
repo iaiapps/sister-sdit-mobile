@@ -57,7 +57,7 @@ const axiosDefaultHeader = () => {
 
 const getData = () => {
     axiosDefaultHeader()
-    axios.get(`${props.url}/presence/${props.localData.teacher_id}`)
+    axios.get(`${props.url}/api/presence/${props.localData.teacher_id}`)
         .then((result) => {
             data.value = result.data.data;
             // console.log(data.value);
