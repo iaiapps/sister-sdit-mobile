@@ -58,9 +58,10 @@
                     <div class="modal-header py-1">
                         <h1 class="modal-title fs-5">{{ title }}</h1>
                         <div>
-                            <button v-on:click="refresh" class="btn fs-4"><i class="bi bi-arrow-clockwise"></i></button>
-                            <button type="button" class="btn fs-4" data-bs-dismiss="modal"><i
-                                    class="bi bi-x-circle"></i></button>
+                            <button v-on:click="refresh" class="btn fs-4">
+                                <i class="bi bi-arrow-clockwise"></i></button>
+                            <button type="button" class="btn fs-4" data-bs-dismiss="modal">
+                                <i class="bi bi-x-circle"></i></button>
                         </div>
                     </div>
                     <div class="modal-body ">

@@ -5,6 +5,7 @@
     <author email="ikromudin.ai@gmail.com" href="https://iaiapps.github.io/">
         Tim IT SDIT Harum
     </author>
+
     <!-- this hook will point your config.xml to the DevServer on Serve -->
     <hook type="after_prepare" src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" />
    
@@ -23,13 +24,6 @@
         <icon density="xxhdpi" src="res/icon/android/xxhdpi.png"/>
         <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png"/>
 
-        <!-- Portrait -->
-        <!-- <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png"/>
-        <splash density="port-mdpi" src="res/screen/android/splash-port-mdpi.png"/>
-        <splash density="port-hdpi" src="res/screen/android/splash-port-hdpi.png"/>
-        <splash density="port-xhdpi" src="res/screen/android/splash-port-xhdpi.png"/>
-        <splash density="port-xxhdpi" src="res/screen/android/splash-port-xxhdpi.png"/>
-        <splash density="port-xxxhdpi" src="res/screen/android/splash-port-xxxhdpi.png"/> -->
 
          <!-- preference -->
         <preference name="SplashScreenDelay" value="1000" />
@@ -37,15 +31,20 @@
         <preference name="SplashMaintainAspectRatio" value="true"/>
         <preference name="SplashShowOnlyFirstTime" value="false"/>
         <preference name="ShowSplashScreenSpinner" value="false" />
-        "<preference name="AndroidPersistentFileLocation" value="Compatibility" />"
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         
         <!-- enable cleartraffic -->
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:usesCleartextTraffic="true" />
         </edit-config>
-    </platform>
+
+        <!-- <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permissions.NETWORK_ACCESS" />
+            <uses-permission android:name="android.permissions.ACCESS_NETWORK_STATE" />
+        </config-file> -->
+</platform>
    
-    
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
