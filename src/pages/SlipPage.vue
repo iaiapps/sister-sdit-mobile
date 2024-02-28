@@ -21,9 +21,9 @@
                     <img src="@/assets/img/kop.svg" class="kop mb-2" alt="kop">
                     <p class="fs-4 fw-bold m-0">SLIP GAJI SDIT HARUM</p>
                     <p class="mb-2">Bulan : {{ data ? new Date(data.bulan).toLocaleDateString("id-ID", {
-                            month: "long",
-                            year: "numeric",
-                        }) : ''
+                        month: "long",
+                        year: "numeric",
+                    }) : ''
                     }} </p>
                 </div>
 
@@ -168,10 +168,10 @@
                                 <tr>
                                     <td class="fw-bold">Gaji yang diterima</td>
                                     <td class="fs-5 text-end fw-bold">{{ data ? new Intl.NumberFormat("id-ID", {
-                                            style: 'currency',
-                                            currency: 'IDR',
-                                            minimumFractionDigits: 0,
-                                        }).format(data.total) : ''
+                                        style: 'currency',
+                                        currency: 'IDR',
+                                        minimumFractionDigits: 0,
+                                    }).format(data.total) : ''
                                     }}</td>
                                 </tr>
                             </tbody>
@@ -180,10 +180,10 @@
                     <div class="col-12 col-md-6">
                         <div class="boxttd mt-2 text-center position-relative clearfix">
                             <p>Jember, {{ data ? new Date(data.bulan).toLocaleDateString("id-ID", {
-                                    day: "numeric",
-                                    month: "long",
-                                    year: "numeric",
-                                }) : ''
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                            }) : ''
                             }} </p>
                             <div class="imgttd">
                                 <img src="@/assets/img/stam.png" alt="stempel" class="stamp" />

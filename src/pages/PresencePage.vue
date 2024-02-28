@@ -20,10 +20,10 @@
                     <tbody>
                         <tr v-for="(item, index) in data" :key="index">
                             <td>{{ new Date(item.created_at).toLocaleDateString("id-ID", {
-                                    day: "numeric",
-                                    month: "numeric",
-                                    year: "numeric",
-                                })
+                                day: "numeric",
+                                month: "numeric",
+                                year: "numeric",
+                            })
                             }}</td>
                             <td>{{ item.time_in }}</td>
                             <td>{{ item.time_out }}</td>
@@ -35,7 +35,6 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup>
