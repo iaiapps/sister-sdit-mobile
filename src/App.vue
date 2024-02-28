@@ -15,7 +15,6 @@
     background-repeat: no-repeat;
     background-size: 100%;
     background-position-x: center;
-    /* background-size: 500px 430px; */
     padding-top: 12px;
 }
 
@@ -37,16 +36,15 @@ const router = useRouter()
 const url = ref('http://192.168.82.241:8000/api') //my local ip adress 
 // const url = ref('http://sister.sditharum.id:8000/api') //sister ip adress 
 
-//variabel local data
+//variabel local data and get
 const localData = ref()
-
-//get localstorage data
 const getLocalData = () => {
     localData.value = JSON.parse(localStorage.getItem("localDataSave"));
 }
 
 //variable menu
 const menu = ref()
+
 //cek menu
 const menuDisable = (val) => {
     menu.value = val
@@ -57,6 +55,7 @@ const menuEnable = (val) => {
 
 //check login
 const checkPageLogin = () => {
+
     if (localData.value == null) {
         router.push({ path: '/' })
         menu.value = false

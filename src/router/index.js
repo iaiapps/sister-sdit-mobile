@@ -1,11 +1,10 @@
 import { createWebHashHistory, createRouter } from "vue-router";
 
-// import LoginPage from "@/pages/LoginPage.vue";
+import LoginPage from "@/pages/LoginPage.vue";
 import HomePage from "@/pages/HomePage.vue";
 import PresencePage from "@/pages/PresencePage.vue";
 // import SlipPage from "@/pages/SlipPage.vue";
 import AppPage from "@/pages/AppPage.vue";
-import LoginPage from "@/pages/LoginPage.vue";
 
 const routes = [
   {

@@ -64,7 +64,7 @@
 <script setup>
 import axios from 'axios';
 import TimeComponent from '@/components/TimeComponent.vue';
-import { ref, defineProps, onMounted, defineEmits, onBeforeMount } from 'vue';
+import { ref, defineProps } from 'vue';
 
 const props = defineProps({
     url: String,
@@ -72,31 +72,21 @@ const props = defineProps({
 })
 
 const selected = ref();
-const select = () => {
-    if (selected.value == 'Tugas kedinasan') {
-        selected.value = true
-        // console.log(selected.value)
-    } else {
-        selected.value = false
-    }
-}
 const kedinasan = ref();
 
 const axiosDefaultHeader = () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${props.localData.access_token}`;
 }
 
+// post data scan
 const postData = () => {
     axiosDefaultHeader();
     axios.post(`${props.url}/presence`, {
         teacher_id: props.localData.teacher_id,
-        // teacher_id: 1,
     }).then((result) => {
-        // console.log(result.data.pesan);
         const pesan = result.data.pesan;
         alert(`${pesan}`);
     }).catch((err) => {
-        // console.log(err.response.data.pesan);
         const pesan = err.response.data.pesan;
         alert(`${pesan}`);
     });
@@ -125,8 +115,9 @@ const scan = () => {
     window.cordova.plugins.barcodeScanner.scan(result, err, options);
 }
 
+// post data dengan note
 const postSelectedItem = () => {
-    if (selected.value == "") {
+    if (selected.value == null) {
         alert("catatan belum dipilih !");
     } else {
         axiosDefaultHeader();
@@ -144,23 +135,4 @@ const postSelectedItem = () => {
         });
     }
 }
-
-const emit = defineEmits([
-    'emitLocalData'
-])
-
-const emitlocalData = () => {
-    emit('emitLocalData')
-}
-
-onBeforeMount(() => {
-    emitlocalData()
-})
-
-onMounted(() => {
-    select()
-    emitlocalData()
-})
-
-
 </script>

@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <!-- <div class="col-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="text-center">
@@ -33,29 +33,22 @@
                             v-on:click="pilih('mutabaah')">pilih</button>
                     </div>
                 </div>
-            </div>
-            <!-- <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <i class="bi bi bi-people display-3"></i>
-                            <p class="mt-3 mb-0 ">Guru Pengganti</p>
-                        </div>
-                    </div>
-                    <div class="card-footer"><button class="btn btn-success w-100" v-on:click="openIna">pilih</button></div>
-                </div>
             </div> -->
+
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="text-center">
-                            <i class="bi bi-chat-square-text display-3"></i>
-                            <p class="mt-3 mb-0 ">Presensi BPI</p>
+                            <i class="bi bi-list-check display-3"></i>
+                            <p class="mt-3 mb-0 ">Mutabaah</p>
                         </div>
                     </div>
-                    <div class="card-footer"><button class="btn btn-success w-100" v-on:click="openIna">pilih</button></div>
+                    <div class="card-footer">
+                        <button class="btn btn-success w-100" v-on:click="openIna">pilih</button>
+                    </div>
                 </div>
             </div>
+
         </div>
 
         <div class="modal fade " id="modalshow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1"
@@ -82,7 +75,7 @@
 
 <style scoped>
 .height {
-    height: calc(100% - 20px);
+    height: calc(100%);
 }
 
 .iframee {
@@ -99,7 +92,11 @@
 </style>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
+
+const props = defineProps({
+    url: String,
+})
 
 const show = ref(true)
 
@@ -117,7 +114,6 @@ const refresh = () => {
 const url = ref('')
 const title = ref('')
 const pilih = (e) => {
-    // console.log(e);
     if (e == 'presensi') {
         title.value = 'Presensi Manual'
         url.value = "https://docs.google.com/forms/d/e/1FAIpQLSdh_4CaFf3IxgE-Nz6XYeHCD-RCrRAMecTmR9EuZiSySJTAcw/viewform?usp=sf_link"
@@ -128,4 +124,63 @@ const pilih = (e) => {
     }
 }
 
+// inappbrowser
+const openIna = () => {
+    const url = `${props.url}/mutabaah-mobile`;
+    const target = '_blank'
+    const options = 'location=no,zoom=no,clearcache=no,clearsessioncache=no'
+
+    const loadStopCallBack = () => {
+        //insert css
+        ina.insertCSS({
+            code: "body{margin-top:70px}\
+                    .header{z-index:99;position:fixed;top:0;right:0;left:0;display:flex;justify-content:space-between;padding:8px 15px;height:55px;}\
+                    .p2{font-size:18px;margin-bottom:0px;padding-top:8px; }"
+
+        });
+        // insert message "close"
+        ina.executeScript({
+            code: " var message = 'close';\
+                    var messageObj = {action: message};\
+                    var stringifiedMessageObj = JSON.stringify(messageObj);\
+                    function closee(){webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);}"
+        });
+        //insert header + button + script time
+        ina.executeScript({
+            code: "(function()\
+                   {var body=document.querySelector('body');\
+                   var div=document.createElement('div');\
+                   div.classList.add('header');\
+                   div.classList.add('bg-light');\
+                   var button=document.createElement('button');\
+                   button.setAttribute('id','button');\
+                   button.innerHTML='close';\
+                   div.appendChild(button);\
+                   button.addEventListener('click',()=>{window.closee()});\
+                   button.classList.add('btn');\
+                   button.classList.add('btn-success');\
+                   var p2=document.createElement('p');\
+                   div.appendChild(p2);\
+                   p2.innerHTML='Mutabaah';\
+                   p2.classList.add('p2');\
+                   var buttonR = document.createElement('button');\
+                   buttonR.setAttribute('id','buttonR');\
+                   buttonR.innerHTML='refresh';\
+                   div.appendChild(buttonR);\
+                   buttonR.addEventListener('click',()=>{window.location.reload()});\
+                   buttonR.classList.add('btn');\
+                   buttonR.classList.add('btn-success');\
+                   body.appendChild(div)})()"
+        });
+        ina.show();
+    }
+    const messageCallBack = (params) => {
+        if (params.data.action == 'close') {
+            ina.close();
+        }
+    }
+    let ina = window.cordova.InAppBrowser.open(url, target, options);
+    ina.addEventListener('loadstop', loadStopCallBack);
+    ina.addEventListener('message', messageCallBack);
+}
 </script>
