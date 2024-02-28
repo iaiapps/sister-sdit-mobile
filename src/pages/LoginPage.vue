@@ -99,7 +99,7 @@ const saveToLocal = () => {
 
 //function login
 const login = () => {
-    axios.defaults.timeout = 10000;
+    axios.defaults.timeout = 15000;
     axios.post(`${props.url}/api/login`, {
         email: email.value,
         password: password.value,
