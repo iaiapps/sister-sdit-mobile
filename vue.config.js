@@ -1,12 +1,10 @@
 const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
+module.exports = {
   transpileDependencies: true,
   publicPath: '',
-
   pluginOptions: {
     cordovaPath: 'src-cordova'
   },
-
   // untuk disable https
   devServer: {
     // open: process.platform === 'darwin',
@@ -15,4 +13,4 @@ module.exports = defineConfig({
     // hotOnly: false,
     https: false,
   },
-})
+}
