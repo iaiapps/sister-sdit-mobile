@@ -139,11 +139,10 @@ const pilih = () => {
 
 }
 
+
 // inappbrowser
 const openIna = (e) => {
-
     const link = ref('');
-
     if (e == 'mutabaah') {
         link.value = `${props.url}/mutabaah-mobile`;
     } else if (e == 'bpi') {
@@ -185,7 +184,7 @@ const openIna = (e) => {
                    button.classList.add('btn-success');\
                    var p2=document.createElement('p');\
                    div.appendChild(p2);\
-                   p2.innerHTML='Mutabaah';\
+                   p2.innerHTML='Isi Data';\
                    p2.classList.add('p2');\
                    var buttonR = document.createElement('button');\
                    buttonR.setAttribute('id','buttonR');\
@@ -203,7 +202,7 @@ const openIna = (e) => {
             ina.close();
         }
     }
-    let ina = window.cordova.InAppBrowser.open(link, target, options);
+    let ina = window.cordova.InAppBrowser.open(link.value, target, options);
     ina.addEventListener('loadstop', loadStopCallBack);
     ina.addEventListener('message', messageCallBack);
 }
