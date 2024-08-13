@@ -11,9 +11,9 @@
                 class="bg-success p-1 mt-2 mb-3 logoapp"
             />
             <p>
-                <b>Sister Mobile SDIT Harum</b> merupakan aplikasi presensi dan
-                aplikasi lainnya di lingkungan SDIT Harapan Umat Jember
+                <b>Sister Mobile SDIT Harum</b> merupakan kumpulan aplikasi mobile di lingkungan SDIT Harapan Umat Jember
             </p>
+            <p><a class="btn btn-sm btn-primary" href="https://linksister.sditharum.id">Link</a> website Sister SDIT Harum Jember</p>
             <p>
                 Jika ada permasalahan terkait aplikasi bisa menghubungi
                 <button v-on:click="send" class="btn btn-success btn-sm">
@@ -96,7 +96,7 @@ const getData = () => {
 };
 
 const send = () => {
-    window.open("whatsapp://send?phone=6285232213939", "_system");
+    window.cordova.InAppBrowser.open("whatsapp://send?phone=6285232213939", "_system");
 };
 const timer = () => {
     setTimeout(() => {

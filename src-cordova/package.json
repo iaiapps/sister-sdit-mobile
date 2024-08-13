@@ -17,7 +17,9 @@
       "android"
     ],
     "plugins": {
-      "phonegap-plugin-barcodescanner": {},
+      "phonegap-plugin-barcodescanner": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
       "cordova-plugin-enable-cleartext-traffic": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-inappbrowser": {},
@@ -27,7 +29,7 @@
   },
   "devDependencies": {
     "add": "^2.0.6",
-    "cordova-android": "^12.0.1",
+    "cordova-android": "^13.0.0",
     "cordova-plugin-auth-dialog": "^0.1.6",
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-enable-cleartext-traffic": "^2.1.0",

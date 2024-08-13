@@ -1,5 +1,4 @@
 <template>
-    <div class="container">
         <div class="p-3">
             <div class="bg-white shadow p-3 rounded top">
                 <div
@@ -82,7 +81,6 @@
                 <small> Sister Mobile Versi 1.3.0 </small>
             </div>
         </div>
-    </div>
 </template>
 
 <style scoped>

@@ -119,9 +119,8 @@
                         </button>
                         <button
                             type="button"
-                            class="btn fs-4"
+                            class="btn fs-4 float-end"
                             data-bs-dismiss="modal"
-                            v-on:click="basciclogout"
                         >
                             <i class="bi bi-x-circle"></i>
                         </button>
@@ -166,9 +165,7 @@ const props = defineProps({
     url: String,
 });
 
-const basciclogout = () => {
-    location.href = "http://149.129.249.117:8000/guru/bascilogout";
-};
+
 
 const show = ref(true);
 
@@ -191,6 +188,7 @@ const pilih = () => {
         "https://docs.google.com/forms/d/e/1FAIpQLSdh_4CaFf3IxgE-Nz6XYeHCD-RCrRAMecTmR9EuZiSySJTAcw/viewform?usp=sf_link";
 };
 
+
 // inappbrowser
 const openIna = (e) => {
     const link = ref("");
@@ -204,7 +202,7 @@ const openIna = (e) => {
 
     const target = "_blank";
     const options = "location=no,zoom=no,clearcache=no,clearsessioncache=no";
-
+    
     const loadStopCallBack = () => {
         //insert css
         ina.insertCSS({
@@ -251,6 +249,7 @@ const openIna = (e) => {
     const messageCallBack = (params) => {
         if (params.data.action == "close") {
             ina.close();
+            // location.href = "http://149.129.249.117:8000/guru/basiclogout";
         }
     };
     let ina = window.cordova.InAppBrowser.open(link.value, target, options);
