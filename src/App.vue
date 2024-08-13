@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-img">
+    <div class="bg-img container">
         <router-view v-bind:localData="localData" v-on:menuEnable="menuEnable" v-bind:url="url"
             v-on:emitLocalData="getLocalData">
         </router-view>
@@ -33,9 +33,10 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 
 //url
-// const url = ref('http://127.0.0.1:8000/api')
+const url = ref('http://127.0.0.1:8000')
 // const url = ref('http://192.168.82.241:8000') //my local ip adress 
-const url = ref('http://sister.sditharum.id:8000') //sister ip adress 
+// const url = ref('http://sister.sditharum.id:8000') //sister ip adress 
+// const url = ref('http://sister.sditharum.id:8000') //sister ip adress 
 
 //variabel local data and get
 const localData = ref()
