@@ -27,8 +27,8 @@
         <div class="mb-3">
             <select class="form-select" v-model="selected">
                 <option disabled value="">Pilih salah satu</option>
-                <option value="sakit">Sakit</option>
-                <option value="ijin">Ijin</option>
+                <option value="Sakit">Sakit</option>
+                <option value="Ijin">Ijin</option>
                 <option value="Tugas kedinasan">Tugas Kedinasan</option>
                 <option value="Pulang awal">Ijin Pulang Awal</option>
             </select>
@@ -37,23 +37,40 @@
                 <label for="kedinasan" class="form-label"
                     >Isi keterangan tugas kedinasannya</label
                 >
-                <input
+
+                <select class="form-select" v-model="catatan">
+                    <option disabled value="">Pilih salah satu</option>
+                    <option>Mengerjakan tugas sekolah (4 jam efektif)</option>
+                    <option>Paguyuban kelas</option>
+                    <option>KKG</option>
+                    <option>Pelatihan</option>
+                    <option>Mendampingi lomba</option>
+                    <option>Event Sekolah</option>
+                </select>
+
+                <!-- <input
                     v-model="catatan"
                     id="kedinasan"
                     type="text"
                     class="form-control"
-                />
+                /> -->
             </div>
             <div v-if="selected == 'Pulang awal'" class="mt-3">
                 <label for="p_awal" class="form-label"
                     >Isi keterangan ijin pulang awal</label
                 >
-                <input
+                <!-- <input
                     v-model="catatan"
                     id="p_awal"
                     type="text"
                     class="form-control"
-                />
+                /> -->
+                <select class="form-select" v-model="catatan">
+                    <option disabled value="">Pilih salah satu</option>
+                    <option>BPI di luar sekolah</option>
+                    <option>Sakit/Anggota Keluarga Sakit</option>
+                    <option>Utusan Sekolah/Tugas Kedinasan</option>
+                </select>
             </div>
         </div>
         <button class="btn btn-success" v-on:click="postSelectedItem()">

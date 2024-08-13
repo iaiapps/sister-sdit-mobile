@@ -9,9 +9,9 @@
 
     <div v-if="show" class="mt-3">
         <div class="bg-white p-3 rounded shadow table-responsive">
-            <table v-if="table" class="table text-center">
+            <table v-if="table" class="table">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th scope="col">Tgl</th>
                         <th scope="col">Datang</th>
                         <th scope="col">Pulang</th>
@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(item, index) in data" :key="index">
-                        <td>
+                        <td class="text-center">
                             {{
                                 new Date(item.created_at).toLocaleDateString(
                                     "id-ID",
@@ -32,14 +32,15 @@
                                 )
                             }}
                         </td>
-                        <td>{{ item.time_in }}</td>
-                        <td>{{ item.time_out }}</td>
-                        <td>
+                        <td class="text-center">{{ item.time_in }}</td>
+                        <td class="text-center">{{ item.time_out }}</td>
+                        <td class="text-start">
                             {{
                                 item.note +
                                 " " +
-                                (item.description == null || " "
-                                    ? ""
+                                (item.description == null ||
+                                item.description == " "
+                                    ? " "
                                     : ": " + item.description)
                             }}
                         </td>
