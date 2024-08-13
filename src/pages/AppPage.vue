@@ -121,6 +121,7 @@
                             type="button"
                             class="btn fs-4"
                             data-bs-dismiss="modal"
+                            v-on:click="basciclogout"
                         >
                             <i class="bi bi-x-circle"></i>
                         </button>
@@ -164,6 +165,10 @@ import { ref, defineProps } from "vue";
 const props = defineProps({
     url: String,
 });
+
+const basciclogout = () => {
+    location.href = "http://149.129.249.117:8000/guru/bascilogout";
+};
 
 const show = ref(true);
 
