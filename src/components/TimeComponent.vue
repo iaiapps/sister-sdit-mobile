@@ -4,7 +4,7 @@
             <h1 class="display-5 fw-bold m-0">{{ timeNow }}</h1>
             <h1 class="fs-4 m-0">{{ dateNow }}</h1>
         </div>
-        <div class="status p1 text-center text-dark">
+        <div class="status text-center text-dark">
             <div v-if="status">
                 <span> <i class="bi bi-wifi fs-3 "></i><br>ON</span>
             </div>
@@ -17,7 +17,7 @@
 
 <style>
 .status {
-    width: 40px;
+    width: 45px;
     color: #212529;
     background-color: white;
     border-radius: 8px;
