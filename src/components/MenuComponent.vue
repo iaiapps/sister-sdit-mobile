@@ -77,10 +77,10 @@ const logout = () => {
         deleteLocalData();
         axios
             .post(`${props.url}/api/logout`)
-            .then((result) => {
-                // this.items = result;
-                console.log(result);
-            })
+            // .then((result) => {
+            //     // this.items = result;
+            //     console.log(result);
+            // })
             .catch((error) => {
                 console.log(error);
             });

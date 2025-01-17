@@ -47,9 +47,11 @@
                     </tr>
                 </tbody>
             </table>
-
+            <!-- <div v-else-if="table == null">
+                Belum ada data presensi
+            </div> -->
             <div v-else class="text-center">
-                Server atau Jaringan Bermasalah, Hubungi Admin !
+               Data Presensi belum ada atau Server dan Jaringan Bermasalah, Hubungi Admin !
             </div>
         </div>
     </div>
@@ -83,6 +85,7 @@ const getData = () => {
         .then((result) => {
             data.value = result.data.data;
             table.value = true;
+            console.log(data.value); 
             // show.value = true;
             // console.log(data.value);
         })
