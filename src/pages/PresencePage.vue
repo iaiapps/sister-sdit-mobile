@@ -9,7 +9,8 @@
 
     <div v-if="show" class="mt-3">
         <div class="bg-white p-3 rounded shadow table-responsive">
-            <table v-if="table" class="table">
+            <template v-if="table">
+            <table class="table">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">Tgl</th>
@@ -47,12 +48,16 @@
                     </tr>
                 </tbody>
             </table>
-            <!-- <div v-else-if="table == null">
-                Belum ada data presensi
-            </div> -->
-            <div v-else class="text-center">
+        </template>
+        <template v-else>
+            <div class="text-center">
+                <p v-if="error" class="m-0">Terjadi kesalahan saat memuat data: {{ error }}</p>
+                <p v-else class="m-0">Data Presensi tidak ditemukan.</p>
+                </div>
+        </template>
+            <!-- <div v-else class="text-center">
                Data Presensi belum ada atau Server dan Jaringan Bermasalah, Hubungi Admin !
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -67,10 +72,10 @@ const props = defineProps({
 });
 
 const loading = ref(true);
-const show = ref();
-const data = ref();
-// const err = ref();
-const table = ref();
+const show = ref(false);
+const data = ref([]);
+const error = ref(null);
+const table = ref(false);
 
 const axiosDefaultHeader = () => {
     axios.defaults.headers.common[
@@ -78,29 +83,44 @@ const axiosDefaultHeader = () => {
     ] = `Bearer ${props.localData.access_token}`;
 };
 
-const getData = () => {
+// const getData = () => {
+//     axiosDefaultHeader();
+//     axios
+//         .get(`${props.url}/api/presence/${props.localData.teacher_id}`)
+//         .then((result) => {
+//             data.value = result.data.data;
+//             table.value = true;
+//             console.log(data.value); 
+//             // show.value = true;
+//             // console.log(data.value);
+//         })
+//         .catch((error) => {
+//             console.log(error);
+//             // show.value = false;
+//             // err.value = true;
+//         });
+// };
+
+const getData = async () => {
     axiosDefaultHeader();
-    axios
-        .get(`${props.url}/api/presence/${props.localData.teacher_id}`)
-        .then((result) => {
-            data.value = result.data.data;
-            table.value = true;
-            console.log(data.value); 
-            // show.value = true;
-            // console.log(data.value);
-        })
-        .catch((error) => {
-            console.log(error);
-            // show.value = false;
-            // err.value = true;
-        });
+    try {
+        const result = await axios.get(`${props.url}/api/presence/${props.localData.teacher_id}`);
+        data.value = result.data.data;
+        table.value = data.value && data.value.length > 0;
+        if (!table.value) {
+            error.value = null; // Data kosong, bukan karena server error
+        }
+    } catch (err) {
+        error.value = "Server tidak merespon atau ada masalah jaringan. Silakan coba lagi nanti.";
+        table.value = false;
+    }
 };
 
 const timer = () => {
     setTimeout(() => {
         show.value = true;
         loading.value = false;
-    }, 2000);
+    }, 1500);
 };
 
 onMounted(() => {

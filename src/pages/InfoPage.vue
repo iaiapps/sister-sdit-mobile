@@ -39,8 +39,7 @@
                 </ul>
             </div>
             <div v-else class="text-center">
-                <p class="mb-2">Server atau Jaringan Bermasalah !</p>
-                <p>hubungi</p>
+                <p class="mb-2">Server atau Jaringan Bermasalah!</p>
             </div>
         </div>
         <hr />
@@ -48,7 +47,7 @@
         <div class="rounded p-2 text-center bg-success text-white">
             <small>Tim IT SDIT Harum Jember</small>
             <br />
-            <small>Versi Aplikasi 1.3.0</small>
+            <VersionComponent/>
         </div>
     </div>
 </template>
@@ -63,6 +62,7 @@
 <script setup>
 import { ref, defineProps, onMounted, onBeforeMount } from "vue";
 import axios from "axios";
+import VersionComponent from "@/components/VersionComponent.vue";
 
 const props = defineProps({
     url: String,
@@ -107,7 +107,6 @@ const timer = () => {
 
 onMounted(() => {
     timer();
-    // getData();
 });
 
 onBeforeMount(() => {

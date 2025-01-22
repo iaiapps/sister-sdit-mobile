@@ -58,7 +58,6 @@
                         aria-describedby="password"
                     />
                     <span class="input-group-text" v-on:click="toggleShow">
-                        <!-- <i class="bi bi-eye-fill"></i> -->
                         <i
                             class="bi"
                             :class="{
@@ -78,7 +77,7 @@
             <div
                 class="footer p-2 text-center bg-success text-white fixed-bottom"
             >
-                <small> Sister Mobile Versi 1.3.0 </small>
+                <VersionComponent/>
             </div>
         </div>
 </template>
@@ -98,6 +97,7 @@
 import { ref, defineEmits, defineProps } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import VersionComponent from "@/components/VersionComponent.vue";
 
 // show password
 const showPassword = ref();

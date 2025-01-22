@@ -1,16 +1,23 @@
 <template>
+  <div>
     <TimeComponent />
     <img
         src="@/assets/img/logo.svg"
         alt="logo"
         class="bg-success p-1 mt-2 logo-app"
     />
-
     <div class="bg-white text-center p-3 top shadow rounded">
         <p class="my-1 mt-4">Assalamualaikum Wr. Wb.</p>
         <p class="fs-5 mb-1">
             <b>{{ props.localData.data.name }}</b>
         </p>
+      <div class="mt-3 small">
+        <ul v-if="viewK" class="list-group ">
+          <li class="list-group-item py-1">Titik Koordinat ({{ latitude +', '+ longitude}})</li>
+          <li class="list-group-item py-1">{{ hasil }}</li>
+        </ul>
+        <p v-else >Mengambil titik koordinat ...</p>
+      </div>
     </div>
 
     <div class="bg-white mt-3 text-center p-3 rounded shadow">
@@ -43,28 +50,15 @@
                     <option>Mengerjakan tugas sekolah (4 jam efektif)</option>
                     <option>Paguyuban kelas</option>
                     <option>KKG</option>
-                    <option>Pelatihan</option>
+                    <option>Pelatihan/Workshop/Webinar</option>
                     <option>Mendampingi lomba</option>
-                    <option>Event Sekolah</option>
+                    <option>Event Sekolah/Yayasan</option>
                 </select>
-
-                <!-- <input
-                    v-model="catatan"
-                    id="kedinasan"
-                    type="text"
-                    class="form-control"
-                /> -->
             </div>
             <div v-if="selected == 'Pulang awal'" class="mt-3">
                 <label for="p_awal" class="form-label"
                     >Isi keterangan ijin pulang awal</label
                 >
-                <!-- <input
-                    v-model="catatan"
-                    id="p_awal"
-                    type="text"
-                    class="form-control"
-                /> -->
                 <select class="form-select" v-model="catatan">
                     <option disabled value="">Pilih salah satu</option>
                     <option>BPI di luar sekolah</option>
@@ -73,13 +67,11 @@
                 </select>
             </div>
         </div>
-        <button class="btn btn-success" v-on:click="postSelectedItem()">
+        <button class="btn btn-success" v-on:click="postSelectedItem">
             KIRIM DATA
         </button>
     </div>
-    <!-- <div class="mt-5">
-        <button v-on:click="getLocation()">Try Geolocation</button>
-    </div> -->
+  </div>
 </template>
 
 <style>
@@ -98,12 +90,15 @@
 .top {
     margin-top: 50px !important;
 }
+.small{
+  font-size: 13px;
+}
 </style>
 
 <script setup>
 import axios from "axios";
 import TimeComponent from "@/components/TimeComponent.vue";
-import { ref, defineProps } from "vue";
+import { ref, defineProps, onMounted, onUnmounted } from "vue";
 
 const props = defineProps({
     url: String,
@@ -119,49 +114,100 @@ const axiosDefaultHeader = () => {
     ] = `Bearer ${props.localData.access_token}`;
 };
 
-// post data scan
-const postData = () => {
-    axiosDefaultHeader();
-    axios
-        .post(`${props.url}/api/presence`, {
-            teacher_id: props.localData.teacher_id,
-        })
-        .then((result) => {
-            const pesan = result.data.pesan;
-            alert(`${pesan}`);
-        })
-        .catch((err) => {
-            const pesan = err.response.data.pesan;
-            alert(`${pesan}`);
-        });
+
+// verify token
+const verifyToken = async () => {
+  if (props.localData.access_token) {
+    try {
+      axiosDefaultHeader()
+      const response = await axios.get(`${props.url}/api/verify-token`);
+      console.log(response)
+    } catch (error) {
+      console.error("Verifikasi token gagal");
+      alert("Anda telah login di perangkat lain. Silakan logout dan login kembali.");
+    
+    }
+  }
 };
 
-// const scan = () => {
-//     const result = (result) => {
-//         const hasilScan = result.text;
-//         if (hasilScan === props.localData.qrcode) {
-//             postData();
-//         } else {
-//             alert("Data QR tidak sama");
-//         }
-//     };
-//     const err = (err) => {
-//         alert("scan QR: " + err);
-//     };
-//     const options = {
-//         preferFrontCamera: false,
-//         saveHistory: false,
-//         prompt: "Tempatkan QRCODE pada area tengah scanner",
-//         resultDisplayDuration: 0,
-//         formats: "QR_CODE,EAN_13,DATA_MATRIX",
-//     };
-//     window.cordova.plugins.barcodeScanner.scan(result, err, options);
-// };
 
+// Tambah get GPS 
+// Deklarasi variabel reaktif
+const viewK = ref(false);
+const latitude =ref(0);
+const longitude =ref(0);
+const hasil = ref()
+const isWithinScanRadius = ref(false); // Menyimpan status apakah dalam radius
 
-// Titik pusat lokasi dan radius yang diizinkan
-const centerPoint = { lat: props.localData.latitude, lng: props.localData.longitude }; // Latitude dan Longitude pusat
-const radius = ref(props.localData.radius).value; // Radius dalam meter
+// Fungsi untuk mendapatkan lokasi
+const getK = () => {
+
+  viewK.value = false; // Set view ke loading sebelum memulai proses
+
+  // Fungsi sukses untuk menangkap lokasi
+  const onSuccess = (position) => {
+    latitude.value = position.coords.latitude
+    longitude.value = position.coords.longitude
+    console.log(
+      'Latitude: ' + position.coords.latitude + '\n' +
+      'Longitude: ' + position.coords.longitude + '\n'
+    );
+
+    // Lokasi pengguna berdasarkan navigator
+    const userLocation = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+    };
+
+    // Lokasi pusat (contoh)
+    const centerPoint = { lat: props.localData.latitude, lng: props.localData.longitude }; // Latitude dan Longitude pusat
+    const radius = props.localData.radius; // Radius dalam meter
+
+    // Cek apakah pengguna berada dalam radius
+    const result = isWithinRadius(centerPoint, userLocation, radius);
+    viewK.value = true; // Menampilkan hasil setelah selesai
+
+    if(result.withinRadius){
+      hasil.value = `Radius ${result.distance.toFixed(2)} m dari titik yang ditentukan.` 
+      isWithinScanRadius.value = true;
+      // viewK.value = false;
+      // console.log(`Anda berada dalam radius ${result.distance.toFixed(2)} m dari titik yang ditentukan.`)
+    }else{
+      hasil.value = `Berada di luar radius, jarak: ${result.distance.toFixed(2)} m dari titik yang ditentukan.`
+      isWithinScanRadius.value = false;
+      // viewK.value = false;
+      // console.log(`Anda berada di luar radius. Jarak: ${result.distance.toFixed(2)} m dari titik yang ditentukan.`)
+    }
+
+  };
+  // Fungsi error untuk menangani kesalahan
+  const onError = (error) => {
+    
+    if (error.code === 1) {
+      // Error kode 1: Izin ditolak
+      hasil.value = 'Izin lokasi ditolak. Harap aktifkan GPS dan beri izin akses lokasi.';
+    } else if (error.code === 2) {
+      // Error kode 2: Tidak ada sinyal lokasi
+      hasil.value = 'Tidak dapat menemukan lokasi. Pastikan GPS aktif.';
+    } else if (error.code === 3) {
+      // Error kode 3: Waktu permintaan habis
+      hasil.value = 'Waktu permintaan lokasi habis. Coba lagi.';
+    } else {
+      // Error lainnya
+      hasil.value = `Kesalahan lokasi: ${error.message}`;
+    }
+    viewK.value = true;
+    isWithinScanRadius.value = false;
+    console.error('Kesalahan GPS:', error);
+  };
+
+   // Mendapatkan posisi pengguna
+
+   navigator.geolocation.getCurrentPosition(onSuccess, onError, {
+    enableHighAccuracy: true, // Gunakan lokasi dengan akurasi tinggi (GPS)
+    timeout: 10000, // Batas waktu 10 detik
+  });
+};
 
 // Fungsi untuk mengonversi derajat ke radian
 const toRadians = (deg) => (deg * Math.PI) / 180;
@@ -182,70 +228,57 @@ const calculateDistance = (point1, point2) => {
   return R * c; // Hasil dalam meter
 };
 
-// Fungsi untuk mendapatkan lokasi pengguna
-const getUserLocation = () =>
-  new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-
 // Fungsi untuk memeriksa apakah pengguna berada dalam radius
-const isWithinRadius = async (centerPoint, radius) => {
-  try {
-    const position = await getUserLocation();
-    const userLocation = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude,
-    };
-
-    const distance = calculateDistance(centerPoint, userLocation);
-    return { withinRadius: distance <= radius, distance };
-  } catch {
-    throw new Error("Gagal mendapatkan lokasi. Pastikan GPS aktif.");
-  }
+const isWithinRadius = (centerPoint, userLocation, radius) => {
+  const distance = calculateDistance(centerPoint, userLocation);
+  return { withinRadius: distance <= radius, distance };
 };
 
-// Fungsi utama untuk memvalidasi lokasi dan memulai proses scan QR code
-const scan = async (props) => {
-  try {
-    // Validasi lokasi
-    const { withinRadius, distance } = await isWithinRadius(centerPoint, radius);
+// post data scan
+const postData = () => {
+    axiosDefaultHeader();
+    axios
+        .post(`${props.url}/api/presence`, {
+            teacher_id: props.localData.teacher_id,
+        })
+        .then((result) => {
+            const pesan = result.data.pesan;
+            alert(`${pesan}`);
+        })
+        .catch((err) => {
+            const pesan = err.response.data.pesan;
+            alert(`${pesan}`);
+        });
+};
 
-    if (!withinRadius) {
-      alert(
-        `Anda berada di luar radius. Jarak: ${distance.toFixed(
-          2
-        )} meter dari lokasi yang diizinkan.`
-      );
-      return;
-    }
+const scan = () => {
+  console.log(isWithinScanRadius.value);
+  if (!isWithinScanRadius.value) {
+    alert('Data koordinat tidak ada atau berada di luar radius scan. Pemindaian QR Code tidak diizinkan.');
+    return;
 
-    // Lanjutkan ke proses scan QR code
-    window.cordova.plugins.barcodeScanner.scan(
-      (result) => {
-        if (result.text === props.localData.qrcode) {
-          postData(); // Panggil fungsi untuk mengirim data
+  }
+    const result = (result) => {
+        const hasilScan = result.text;
+        if (hasilScan === props.localData.qrcode) {
+            postData();
         } else {
-          alert("Data QR tidak sesuai.");
+            alert("Data QR tidak sama");
         }
-      },
-      (err) => {
-        alert("Terjadi kesalahan saat scan QR: " + err);
-      },
-      {
+    };
+    const err = (err) => {
+        alert("scan QR: " + err);
+    };
+    const options = {
         preferFrontCamera: false,
         saveHistory: false,
-        prompt: "Tempatkan QR Code di dalam area pemindai",
+        prompt: "Tempatkan QRCODE pada area tengah scanner",
         resultDisplayDuration: 0,
         formats: "QR_CODE,EAN_13,DATA_MATRIX",
-      }
-    );
-  } catch (error) {
-    alert(error.message);
-  }
+    };
+    window.cordova.plugins.barcodeScanner.scan(result, err, options);
 };
 
-
-// post data dengan note
 const postSelectedItem = () => {
     if (selected.value == null || selected.value == " ") {
         alert("catatan belum dipilih !");
@@ -269,21 +302,27 @@ const postSelectedItem = () => {
     }
 };  
 
+// Lifecycle Hook vue dan cordova
+onMounted(() => {
+  const onDeviceReady = () => {
+    console.log("Cordova device ready.");
+    verifyToken();
+    getK(); // Mendapatkan lokasi saat perangkat siap
+  };
 
-// // geolocation
-// const getLocation = ()=>{
-//      // onSuccess Callback
-//     const onSuccess = (position)=> {
-//        console.log('Latitude: '+ position.coords.latitude + '\n' +
-//               'Longitude: '+ position.coords.longitude + '\n' )
-//     };
+  const onResume = () => {
+    console.log("Aplikasi dilanjutkan (resume).");
+    getK(); // Memanggil lokasi saat aplikasi dilanjutkan
+    verifyToken();
+  };
 
-//     // onError Callback receives a PositionError object
-//     const onError = (error)=> {
-//         console.log('code: '+ error.code + '\n' +
-//               'message: '+ error.message + '\n');
-//     }
-   
-//     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-// }
+  document.addEventListener("deviceready", onDeviceReady);
+  document.addEventListener("resume", onResume);
+
+  // Membersihkan event listener saat komponen dilepas
+  onUnmounted(() => {
+    document.removeEventListener("deviceready", onDeviceReady);
+    document.removeEventListener("resume", onResume);
+  });
+});
 </script>
