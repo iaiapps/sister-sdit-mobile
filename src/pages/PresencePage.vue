@@ -83,25 +83,6 @@ const axiosDefaultHeader = () => {
     axios.defaults.headers.get['version'] = props.localData.version; //ini untuk get
 };
 
-
-// const getData = () => {
-//     axiosDefaultHeader();
-//     axios
-//         .get(`${props.url}/api/presence/${props.localData.teacher_id}`)
-//         .then((result) => {
-//             data.value = result.data.data;
-//             table.value = true;
-//             console.log(data.value); 
-//             // show.value = true;
-//             // console.log(data.value);
-//         })
-//         .catch((error) => {
-//             console.log(error);
-//             // show.value = false;
-//             // err.value = true;
-//         });
-// };
-
 const getData = async () => {
     axiosDefaultHeader();
     try {
