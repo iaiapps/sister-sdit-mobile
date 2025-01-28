@@ -53,7 +53,6 @@ const props = defineProps({
 //emit kirim data dari child ke parent
 const emit = defineEmits([
     "menuDisable",
-    // 'dataPresence',
 ]);
 
 //axios default header
@@ -74,7 +73,6 @@ const menu = () => {
 const logout = () => {
     if (confirm("Apakah anda yakin untuk keluar ?") == true) {
         axiosDefaultheader();
-        deleteLocalData();
         axios
             .post(`${props.url}/api/logout`)
             // .then((result) => {
@@ -84,6 +82,7 @@ const logout = () => {
             .catch((error) => {
                 console.log(error);
             });
+        deleteLocalData();
         toRoot();
         menu();
         console.log("berhasil logout");
