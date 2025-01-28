@@ -77,11 +77,12 @@ const data = ref([]);
 const error = ref(null);
 const table = ref(false);
 
+// defaul header data yang dikirim
 const axiosDefaultHeader = () => {
-    axios.defaults.headers.common[
-        "Authorization"
-    ] = `Bearer ${props.localData.access_token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${props.localData.access_token}`;
+    axios.defaults.headers.get['version'] = props.localData.version; //ini untuk get
 };
+
 
 // const getData = () => {
 //     axiosDefaultHeader();
@@ -110,9 +111,14 @@ const getData = async () => {
         if (!table.value) {
             error.value = null; // Data kosong, bukan karena server error
         }
+        console.log(result);
     } catch (err) {
-        error.value = "Server tidak merespon atau ada masalah jaringan. Silakan coba lagi nanti.";
-        table.value = false;
+        if(err.response.status == '401' ){
+            alert("Anda telah login di perangkat lain. Silakan logout dan login kembali.");
+        }else{
+            error.value = "Server tidak merespon atau ada masalah jaringan. Silakan coba lagi nanti.";
+            table.value = false;
+        }
     }
 };
 

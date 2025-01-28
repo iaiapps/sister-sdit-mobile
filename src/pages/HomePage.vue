@@ -108,12 +108,13 @@ const props = defineProps({
 const selected = ref();
 const catatan = ref();
 
+// defaul header data yang dikirim
 const axiosDefaultHeader = () => {
-    axios.defaults.headers.common[
-        "Authorization"
-    ] = `Bearer ${props.localData.access_token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${props.localData.access_token}`;
+    axios.defaults.headers.post['version'] = props.localData.version; //ini unutk post
 };
 
+// console.log(props.localData)
 
 // verify token
 const verifyToken = async () => {
@@ -245,18 +246,23 @@ const postData = () => {
             const pesan = result.data.pesan;
             alert(`${pesan}`);
         })
-        .catch((err) => {
-            const pesan = err.response.data.pesan;
-            alert(`${pesan}`);
+        .catch((error) => {
+          console.log(error.response);
+              if(error.response.status == '401' ){
+                alert("Anda telah login di perangkat lain. Silakan logout dan login kembali.");
+              }else{
+                alert(error.response.data.pesan);
+              }
         });
 };
 
+// scan qrcode
 const scan = () => {
+  // cek radius
   console.log(isWithinScanRadius.value);
   if (!isWithinScanRadius.value) {
     alert('Data koordinat tidak ada atau berada di luar radius scan. Pemindaian QR Code tidak diizinkan.');
     return;
-
   }
     const result = (result) => {
         const hasilScan = result.text;
@@ -279,6 +285,7 @@ const scan = () => {
     window.cordova.plugins.barcodeScanner.scan(result, err, options);
 };
 
+// post data dari pilihan
 const postSelectedItem = () => {
     if (selected.value == null || selected.value == " ") {
         alert("catatan belum dipilih !");
@@ -291,13 +298,18 @@ const postSelectedItem = () => {
                 description: catatan.value,
             })
             .then((result) => {
+              console.log(result)
                 const pesan = result.data.pesan;
                 selected.value = false;
                 alert(pesan);
             })
             .catch((error) => {
-                console.log(error);
-                // alert(error.response.data);
+              console.log(error.response);
+              if(error.response.status == '401' ){
+                alert("Anda telah login di perangkat lain. Silakan logout dan login kembali.");
+              }else{
+                alert(error.response.data.pesan);
+              }
             });
     }
 };  
