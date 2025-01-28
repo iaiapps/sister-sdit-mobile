@@ -64,6 +64,7 @@ const axiosDefaultheader = () => {
 
 const deleteLocalData = () => {
     localStorage.clear();
+    sessionStorage.clear(); 
 };
 
 const menu = () => {
