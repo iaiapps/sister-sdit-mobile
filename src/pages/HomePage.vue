@@ -33,7 +33,7 @@
         </p>
         <div class="mb-3">
             <select class="form-select" v-model="selected">
-                <option disabled value="">Pilih salah satu</option>
+                <option disabled>Pilih salah satu</option>
                 <option value="Sakit">Sakit</option>
                 <option value="Ijin">Ijin</option>
                 <option value="Tugas kedinasan">Tugas Kedinasan</option>
@@ -42,11 +42,9 @@
 
             <div v-if="selected == 'Tugas kedinasan'" class="mt-3">
                 <label for="kedinasan" class="form-label"
-                    >Isi keterangan tugas kedinasannya</label
-                >
-
+                    >Isi keterangan tugas kedinasannya</label>
                 <select class="form-select" v-model="catatan">
-                    <option disabled value="">Pilih salah satu</option>
+                    <option disabled>Pilih salah satu</option>
                     <option>Mengerjakan tugas sekolah (4 jam efektif)</option>
                     <option>Paguyuban kelas</option>
                     <option>KKG</option>
@@ -60,7 +58,7 @@
                     >Isi keterangan ijin pulang awal</label
                 >
                 <select class="form-select" v-model="catatan">
-                    <option disabled value="">Pilih salah satu</option>
+                    <option disabled>Pilih salah satu</option>
                     <option>BPI di luar sekolah</option>
                     <option>Sakit/Anggota Keluarga Sakit</option>
                     <option>Utusan Sekolah/Tugas Kedinasan</option>
@@ -287,32 +285,36 @@ const scan = () => {
 
 // post data dari pilihan
 const postSelectedItem = () => {
-    if (selected.value == null || selected.value == " ") {
-        alert("catatan belum dipilih !");
-    } else {
-        axiosDefaultHeader();
-        axios
-            .post(`${props.url}/api/presence`, {
-                teacher_id: props.localData.teacher_id,
-                note: selected.value,
-                description: catatan.value,
-            })
-            .then((result) => {
-              console.log(result)
-                const pesan = result.data.pesan;
-                selected.value = false;
-                alert(pesan);
-            })
-            .catch((error) => {
-              console.log(error.response);
-              if(error.response.status == '401' ){
-                alert("Anda telah login di perangkat lain. Silakan logout dan login kembali.");
-              }else{
-                alert(error.response.data.pesan);
-              }
-            });
+    if (!selected.value) {
+        alert("Catatan belum dipilih!");
+        return;
     }
-};  
+    if ((selected.value === "Tugas kedinasan" || selected.value === "Pulang awal") && !catatan.value) {
+        alert("Silakan isi keterangan terlebih dahulu!");
+        return;
+    }
+    axiosDefaultHeader();
+    axios
+        .post(`${props.url}/api/presence`, {
+            teacher_id: props.localData.teacher_id,
+            note: selected.value,
+            description: catatan.value,
+        })
+        .then((result) => {
+          console.log(result)
+            const pesan = result.data.pesan;
+            selected.value = false;
+            alert(pesan);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          if(error.response.status == '401' ){
+            alert("Anda telah login di perangkat lain. Silakan logout dan login kembali.");
+          }else{
+            alert(error.response.data.pesan);
+          }
+        });
+  };  
 
 // Lifecycle Hook vue dan cordova
 onMounted(() => {
