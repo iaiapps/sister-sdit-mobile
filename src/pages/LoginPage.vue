@@ -130,12 +130,16 @@ const password = ref();
 const failed = ref(false);
 const msg = ref();
 const errorCheck = () => {
-    if (failed.value == 401) {
+    const status = failed.value;
+    if (status === 401) {
         failed.value = true;
         msg.value = "Email atau Password Salah !";
-    } else if (failed.value == 0) {
+    } else if (status === 0 || status === undefined || status === null) {
         failed.value = true;
         msg.value = "Server atau Jaringan Bermasalah , Hubungi Admin !";
+    } else {
+        failed.value = true;
+        msg.value = "Terjadi kesalahan (" + status + "). Hubungi Admin !";
     }
 };
 const close = () => {

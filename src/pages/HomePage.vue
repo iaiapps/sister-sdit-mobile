@@ -246,10 +246,12 @@ const postData = () => {
         })
         .catch((error) => {
           console.log(error.response);
-              if(error.response.status == '401' ){
+              if(error.response && error.response.status === 401 ){
                 alert("Anda telah login di perangkat lain. Silakan logout dan login kembali.");
-              }else{
+              }else if(error.response && error.response.data && error.response.data.pesan){
                 alert(error.response.data.pesan);
+              }else{
+                alert("Terjadi kesalahan. Silakan coba lagi.");
               }
         });
 };
@@ -308,10 +310,12 @@ const postSelectedItem = () => {
         })
         .catch((error) => {
           console.log(error.response);
-          if(error.response.status == '401' ){
+          if(error.response && error.response.status === 401 ){
             alert("Anda telah login di perangkat lain. Silakan logout dan login kembali.");
-          }else{
+          }else if(error.response && error.response.data && error.response.data.pesan){
             alert(error.response.data.pesan);
+          }else{
+            alert("Terjadi kesalahan. Silakan coba lagi.");
           }
         });
   };  

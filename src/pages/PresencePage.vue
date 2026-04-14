@@ -94,12 +94,14 @@ const getData = async () => {
         }
         console.log(result);
     } catch (err) {
-        if(err.response.status == '401' ){
+        if(err.response && err.response.status === 401 ){
             alert("Anda telah login di perangkat lain. Silakan logout dan login kembali.");
+        }else if(err.response && err.response.data && err.response.data.pesan){
+            error.value = err.response.data.pesan;
         }else{
             error.value = "Server tidak merespon atau ada masalah jaringan. Silakan coba lagi nanti.";
-            table.value = false;
         }
+        table.value = false;
     }
 };
 
