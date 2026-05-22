@@ -27,7 +27,7 @@
         </button>
     </div>
 
-    <div class="bg-white mt-3 text-center p-3 rounded shadow">
+    <div v-if="isGroupA" class="bg-white mt-3 text-center p-3 rounded shadow">
         <p class="fs-5">
             Catatan: Ijin, Sakit, atau Tugas Kedinasan, Pulang Awal
         </p>
@@ -96,13 +96,14 @@
 <script setup>
 import axios from "axios";
 import TimeComponent from "@/components/TimeComponent.vue";
-import { ref, defineProps, onMounted, onUnmounted } from "vue";
+import { ref, computed, defineProps, onMounted, onUnmounted } from "vue";
 
 const props = defineProps({
     url: String,
     localData: Object,
 });
 
+const isGroupA = computed(() => props.localData?.role === 'guru' || props.localData?.role === 'tendik');
 const selected = ref();
 const catatan = ref();
 
@@ -236,8 +237,9 @@ const isWithinRadius = (centerPoint, userLocation, radius) => {
 // post data scan
 const postData = () => {
     axiosDefaultHeader();
+    const endpoint = isGroupA.value ? 'presence' : 'presencekaryawan';
     axios
-        .post(`${props.url}/api/presence`, {
+        .post(`${props.url}/api/${endpoint}`, {
             teacher_id: props.localData.teacher_id,
         })
         .then((result) => {
@@ -287,6 +289,7 @@ const scan = () => {
 
 // post data dari pilihan
 const postSelectedItem = () => {
+    if (!isGroupA.value) return;
     if (!selected.value) {
         alert("Catatan belum dipilih!");
         return;

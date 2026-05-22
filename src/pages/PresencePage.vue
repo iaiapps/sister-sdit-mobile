@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, onBeforeMount, onMounted } from "vue";
+import { ref, computed, defineProps, onBeforeMount, onMounted } from "vue";
 import axios from "axios";
 
 const props = defineProps({
@@ -71,6 +71,7 @@ const props = defineProps({
     localData: Object,
 });
 
+const isGroupA = computed(() => props.localData?.role === 'guru' || props.localData?.role === 'tendik');
 const loading = ref(true);
 const show = ref(false);
 const data = ref([]);
@@ -84,9 +85,11 @@ const axiosDefaultHeader = () => {
 };
 
 const getData = async () => {
+    if (!props.localData?.teacher_id) return;
     axiosDefaultHeader();
     try {
-        const result = await axios.get(`${props.url}/api/presence/${props.localData.teacher_id}`);
+        const endpoint = isGroupA.value ? 'presence' : 'presencekaryawan';
+        const result = await axios.get(`${props.url}/api/${endpoint}/${props.localData.teacher_id}`);
         data.value = result.data.data;
         table.value = data.value && data.value.length > 0;
         if (!table.value) {

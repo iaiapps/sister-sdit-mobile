@@ -16,7 +16,7 @@
             <i class="bi bi-file-earmark-text-fill fs-5"></i>
             <span class="small d-block">Slip</span>
         </router-link> -->
-        <router-link to="/apppage" class="btn btn-success btn-sm rounded-0">
+        <router-link v-if="isGroupA" to="/apppage" class="btn btn-success btn-sm rounded-0">
             <i class="bi bi-terminal-fill fs-5"></i>
             <span class="small d-block">Apps</span>
         </router-link>
@@ -35,7 +35,7 @@
 
 <script setup>
 import axios from "axios";
-import { defineProps, defineEmits } from "vue";
+import { computed, defineProps, defineEmits } from "vue";
 import { useRouter } from "vue-router";
 
 //router
@@ -49,6 +49,8 @@ const props = defineProps({
     url: String,
     localData: Object,
 });
+
+const isGroupA = computed(() => props.localData?.role === 'guru' || props.localData?.role === 'tendik');
 
 //emit kirim data dari child ke parent
 const emit = defineEmits([
