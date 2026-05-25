@@ -60,7 +60,7 @@
 </style>
 
 <script setup>
-import { ref, computed, defineProps, onMounted, onBeforeMount } from "vue";
+import { ref, defineProps, onMounted, onBeforeMount } from "vue";
 import axios from "axios";
 import VersionComponent from "@/components/VersionComponent.vue";
 
@@ -69,7 +69,6 @@ const props = defineProps({
     localData: Object,
 });
 
-const role = computed(() => props.localData?.role);
 const loading = ref(true);
 const show = ref();
 const data = ref([]);
@@ -86,12 +85,7 @@ const getData = () => {
     axios
         .get(`${props.url}/api/settinglist`)
         .then((result) => {
-            const all = result.data.data || [];
-            data.value = all.filter(s => {
-                if (!s.name.includes(':')) return true;
-                const suffix = s.name.split(':').pop();
-                return suffix === role.value;
-            });
+            data.value = result.data.data || [];
             console.log(data.value);
             list.value = true;
         })

@@ -71,7 +71,7 @@ const props = defineProps({
     localData: Object,
 });
 
-const isGroupA = computed(() => props.localData?.role === 'guru' || props.localData?.role === 'tendik');
+const isGroupA = computed(() => props.localData?.group === 'A');
 const loading = ref(true);
 const show = ref(false);
 const data = ref([]);

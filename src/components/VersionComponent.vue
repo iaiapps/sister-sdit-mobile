@@ -1,3 +1,3 @@
 <template>
-    <small>Sister Mobile Versi 1.4.0</small>
+    <small>Sister Mobile Versi 1.5.0</small>
 </template>
