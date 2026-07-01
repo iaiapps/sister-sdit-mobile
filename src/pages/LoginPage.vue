@@ -1,95 +1,125 @@
 <template>
-        <div class="p-3">
-            <div class="bg-white shadow p-3 rounded top">
-                <div
-                    v-if="failed"
-                    class="alert alert-danger alert-dismissible fade show"
-                    role="alert"
-                >
-                    <span>{{ msg }}</span>
-                    <button
-                        v-on:click="close"
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close"
-                    ></button>
-                </div>
-                <div class="text-center mb-4">
-                    <img
-                        src="@/assets/img/logo.svg"
-                        alt="logo"
-                        class="bg-success p-1 rounded my-3 login-logo"
-                    />
-                    <h1 class="display-6 mt-1">Login Aplikasi Presensi</h1>
-                    <p class="mt-1">SDIT Harapan Umat Jember</p>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="email"
-                        ><i class="bi bi-envelope-fill"></i
-                    ></span>
-                    <input
-                        v-model="email"
-                        type="email"
-                        class="form-control"
-                        placeholder="email@email.com"
-                        aria-label="email"
-                        aria-describedby="email"
-                    />
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="password"
-                        ><i class="bi bi-key-fill"></i
-                    ></span>
-                    <input
-                        v-if="showPassword"
-                        type="text"
-                        class="form-control"
-                        v-model="password"
-                    />
-                    <input
-                        v-else
-                        v-model="password"
-                        type="password"
-                        class="form-control"
-                        placeholder="********"
-                        aria-label="email"
-                        aria-describedby="password"
-                    />
-                    <span class="input-group-text" v-on:click="toggleShow">
-                        <i
-                            class="bi"
-                            :class="{
-                                'bi-eye-slash-fill': showPassword,
-                                'bi-eye-fill': !showPassword,
-                            }"
-                        ></i>
-                    </span>
-                </div>
-                <button
-                    v-on:click="login"
-                    class="btn btn-success w-100 mt-2 mb-3"
-                >
-                    LOGIN
-                </button>
-            </div>
-            <div
-                class="footer p-2 text-center bg-success text-white fixed-bottom"
-            >
-                <VersionComponent/>
-            </div>
+    <div class="login-page">
+        <div class="login-header">
+            <div class="logo-wrap"><img src="@/assets/img/logo.svg" alt="logo"></div>
+            <h1>SISTER SDIT</h1>
+            <p>Presensi & Informasi<br>SDIT Harapan Umat Jember</p>
         </div>
+        <div class="login-body">
+            <div v-if="failed" class="alert alert-danger alert-dismissible fade show py-2" role="alert">
+                <small>{{ msg }}</small>
+                <button v-on:click="close" type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <label class="form-label">Email</label>
+            <div class="input-wrap">
+                <i class="bi bi-envelope"></i>
+                <input v-model="email" type="email" placeholder="email@email.com">
+            </div>
+            <label class="form-label">Password</label>
+            <div class="input-wrap">
+                <i class="bi bi-lock"></i>
+                <input v-if="showPassword" type="text" v-model="password">
+                <input v-else v-model="password" type="password" placeholder="********">
+                <span class="toggle-eye" v-on:click="toggleShow">
+                    <i class="bi" :class="{'bi-eye-slash-fill': showPassword, 'bi-eye-fill': !showPassword}"></i>
+                </span>
+            </div>
+            <button v-on:click="login" class="btn-login">MASUK</button>
+            <div class="login-version"><VersionComponent/></div>
+        </div>
+    </div>
 </template>
 
 <style scoped>
-.login-logo {
-    width: 80px;
-    border-radius: 13px !important;
+.login-page {
+    min-height: 100vh;
+    background: #f5f7fa;
+    display: flex;
+    flex-direction: column;
 }
-
-.top {
-    margin-top: 70px;
+.login-header {
+    background: linear-gradient(135deg, #077944, #0ba360);
+    padding: 48px 28px 36px;
+    text-align: center;
+}
+.logo-wrap {
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 14px;
+    margin: 0 auto 16px;
+}
+.logo-wrap img { width: 100%; height: 100%; }
+.login-header h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+}
+.login-header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+.login-body {
+    padding: 24px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+    display: block;
+}
+.input-wrap {
+    background: white;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+}
+.input-wrap:focus-within { border-color: #077944; }
+.input-wrap input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    padding: 14px 0;
+    width: 100%;
+    color: #1a1a2e;
+}
+.input-wrap input::placeholder { color: #94a3b8; }
+.input-wrap i { color: #94a3b8; font-size: 18px; margin-right: 10px; }
+.toggle-eye { color: #94a3b8; cursor: pointer; padding: 8px; margin-right: -8px; }
+.btn-login {
+    background: #077944;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    width: 100%;
+    margin-top: auto;
+    transition: transform 0.15s;
+}
+.btn-login:active { transform: scale(0.98); }
+.login-version {
+    text-align: center;
+    margin-top: 16px;
+    color: #94a3b8;
+    font-size: 12px;
 }
 </style>
 
@@ -99,34 +129,28 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 import VersionComponent from "@/components/VersionComponent.vue";
 
-// show password
 const showPassword = ref();
 const toggleShow = () => {
     showPassword.value = !showPassword.value;
 };
 
-//props-get data from parent
 const props = defineProps({
     url: String,
 });
 
-//emit
 const emit = defineEmits(["menuEnable"]);
 const menu = () => {
     emit("menuEnable", true);
 };
 
-//get link route
 const router = useRouter();
 const toHome = () => {
     router.go({ path: "/homepage" });
 };
 
-//login data
 const email = ref();
 const password = ref();
 
-//handling error
 const failed = ref(false);
 const msg = ref();
 const errorCheck = () => {
@@ -146,13 +170,11 @@ const close = () => {
     failed.value = false;
 };
 
-//save to local
 const loginData = ref();
 const saveToLocal = () => {
     localStorage.setItem("localDataSave", JSON.stringify(loginData.value));
 };
 
-//function login
 const login = () => {
     axios.defaults.timeout = 15000;
     axios
