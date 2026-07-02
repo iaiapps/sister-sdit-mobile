@@ -1,25 +1,27 @@
 <template>
-    <div>
-        <router-view
-            v-bind:localData="localData"
-            v-on:menuEnable="menuEnable"
-            v-bind:url="url"
-            v-on:emitLocalData="getLocalData"
-        >
-        </router-view>
-        <div v-if="menu" class="kosong"></div>
-        <MenuComponent
-            v-if="menu"
-            v-bind:localData="localData"
-            v-on:menuDisable="menuDisable"
-            v-bind:url="url"
-        >
-        </MenuComponent>
-    </div>
+  <div>
+    <router-view
+      v-bind:localData="localData"
+      v-on:menuEnable="menuEnable"
+      v-bind:url="url"
+      v-on:emitLocalData="getLocalData"
+    >
+    </router-view>
+    <div v-if="menu" class="kosong"></div>
+    <MenuComponent
+      v-if="menu"
+      v-bind:localData="localData"
+      v-on:menuDisable="menuDisable"
+      v-bind:url="url"
+    >
+    </MenuComponent>
+  </div>
 </template>
 
 <style>
-.kosong { height: 70px; }
+.kosong {
+  height: 70px;
+}
 </style>
 
 <script setup>
@@ -33,41 +35,58 @@ const url = ref("https://sister.sditharum.id/sister");
 
 const localData = ref();
 const getLocalData = () => {
-    localData.value = JSON.parse(localStorage.getItem("localDataSave"));
+  localData.value = JSON.parse(localStorage.getItem("localDataSave"));
 };
 
 const menu = ref();
 
 const menuDisable = (val) => {
-    menu.value = val;
+  menu.value = val;
 };
 const menuEnable = (val) => {
-    menu.value = val;
+  menu.value = val;
 };
 
 const checkPageLogin = () => {
-    if (localData.value == null) {
-        router.push({ path: "/" });
-        menu.value = false;
-    } else {
-        router.push({ path: "homepage" });
-        menu.value = true;
-    }
+  if (localData.value == null) {
+    router.push({ path: "/" });
+    menu.value = false;
+  } else {
+    router.push({ path: "homepage" });
+    menu.value = true;
+  }
 };
 
 const fetchMenus = async () => {
-    try {
-        const res = await fetch(`${url.value}/mobile-menus.json`);
-        const data = await res.json();
-        localStorage.setItem("mobileMenus", JSON.stringify(data));
-    } catch {
-        // fallback di AppPage
-    }
+  try {
+    const res = await fetch(`${url.value}/mobile-menus.json`);
+    const data = await res.json();
+    localStorage.setItem("mobileMenus", JSON.stringify(data));
+  } catch {
+    // fallback di AppPage
+  }
 };
 
 onMounted(() => {
-    getLocalData();
-    checkPageLogin();
-    fetchMenus();
+  getLocalData();
+  checkPageLogin();
+  fetchMenus();
 });
 </script>
+
+<style>
+.page-header {
+  background: white;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  height: 61px;
+}
+.page-header h1 {
+  padding-top: 7px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: #1a1a2e;
+  text-align: center;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="page-info">
     <div class="page-header">
-      <h1>Informasi</h1>
+      <h1>INFORMASI</h1>
     </div>
 
     <div class="content px-3">
@@ -71,18 +71,6 @@
   min-height: 100vh;
   background: #f0f2f5;
   padding-bottom: 70px;
-}
-.page-header {
-  background: white;
-  padding: 16px;
-  border-bottom: 1px solid #f0f0f0;
-}
-.page-header h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-  color: #1a1a2e;
-  text-align: center;
 }
 .content {
   padding-top: 12px;

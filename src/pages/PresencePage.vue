@@ -74,18 +74,6 @@
   background: #f0f2f5;
   padding-bottom: 70px;
 }
-.page-header {
-  background: white;
-  padding: 16px;
-  border-bottom: 1px solid #f0f0f0;
-}
-.page-header h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-  color: #1a1a2e;
-  text-align: center;
-}
 .table-wrap {
   background: white;
   border-radius: var(--radius-card);
