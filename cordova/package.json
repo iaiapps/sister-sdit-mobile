@@ -13,7 +13,9 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "cordova": {
-    "platforms": [],
+    "platforms": [
+      "android"
+    ],
     "plugins": {
       "phonegap-plugin-barcodescanner": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"

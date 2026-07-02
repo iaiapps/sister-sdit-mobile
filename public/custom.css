@@ -1,0 +1,64 @@
+/* Import Google Font Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Global Variables & Resets */
+:root {
+  --radius-card: 14px;
+  --radius-control: 12px;
+  --color-slate-500: #64748b;
+  --color-brand-green: #077944;
+  --color-brand-green-hover: #056236;
+  --border-color-light: #e2e8f0;
+  --bg-color-global: #f0f2f5;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-color-global) !important;
+}
+
+#app {
+  height: 100%;
+  background: var(--bg-color-global) !important;
+}
+
+body, button, input, select, textarea {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Global Helper Classes */
+.border-custom-light {
+  border: 1px solid var(--border-color-light) !important;
+}
+
+.text-slate {
+  color: var(--color-slate-500) !important;
+}
+
+.rounded-card {
+  border-radius: var(--radius-card) !important;
+}
+
+.rounded-control {
+  border-radius: var(--radius-control) !important;
+}
+
+.btn-unstyled {
+  border: none !important;
+  background: none !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+}
+
+/* Brand Button Success Override */
+.btn-brand-success {
+  background-color: var(--color-brand-green) !important;
+  border-color: var(--color-brand-green) !important;
+  color: #fff !important;
+}
+
+.btn-brand-success:hover, .btn-brand-success:focus, .btn-brand-success:active {
+  background-color: var(--color-brand-green-hover) !important;
+  border-color: var(--color-brand-green-hover) !important;
+  color: #fff !important;
+}

@@ -13,9 +13,8 @@
         </p>
         <p>
           <a
-            class="btn btn-success btn-sm fw-bold"
+            class="btn btn-brand-success btn-sm fw-bold rounded-control"
             href="https://linksister.sditharum.id"
-            style="border-radius: var(--radius-control)"
             >Link</a
           >
           website Sister SDIT Harum Jember
@@ -24,8 +23,7 @@
           Jika ada permasalahan terkait aplikasi bisa menghubungi
           <button
             v-on:click="send"
-            class="btn btn-success btn-sm fw-bold"
-            style="border-radius: var(--radius-control)"
+            class="btn btn-brand-success btn-sm fw-bold rounded-control"
           >
             Admin
           </button>
@@ -34,7 +32,7 @@
 
       <div class="schedule-card">
         <p class="schedule-title">List Jam Presensi</p>
-        <p v-if="loading" class="text-center small" style="color: #64748b">
+        <p v-if="loading" class="text-center small text-slate">
           loading data...
         </p>
         <div v-if="show">
@@ -49,7 +47,7 @@
             </div>
           </div>
           <div v-else class="text-center">
-            <p class="small" style="color: #64748b">
+            <p class="small text-slate">
               Server atau Jaringan Bermasalah!
             </p>
           </div>
@@ -66,10 +64,7 @@
 
 <style scoped>
 .page-info {
-  --radius-card: 14px;
-  --radius-control: 12px;
   min-height: 100vh;
-  background: #f0f2f5;
   padding-bottom: 70px;
 }
 .content {
@@ -115,7 +110,7 @@
   justify-content: space-between;
   padding: 8px 0;
   font-size: 13px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #e2e8f0;
 }
 .schedule-item:last-child {
   border-bottom: none;

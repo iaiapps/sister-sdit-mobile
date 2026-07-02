@@ -72,9 +72,8 @@
         <div class="flex-grow-1">
           <p class="fs-6 fw-semibold text-dark mb-1">Scan untuk Presensi</p>
           <button
-            class="btn btn-success w-100 py-2 fw-bold"
+            class="btn btn-brand-success w-100 py-2 fw-bold rounded-control"
             v-on:click="scan()"
-            style="border-radius: var(--radius-control)"
           >
             SCAN QR
           </button>
@@ -137,9 +136,8 @@
         </div>
 
         <button
-          class="btn btn-success w-100 py-2 fw-bold mt-2"
+          class="btn btn-brand-success w-100 py-2 fw-bold mt-2 rounded-control"
           v-on:click="postSelectedItem"
-          style="border-radius: var(--radius-control)"
         >
           KIRIM DATA
         </button>
@@ -159,7 +157,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #e2e8f0;
   position: sticky;
   top: 0;
   z-index: 10;

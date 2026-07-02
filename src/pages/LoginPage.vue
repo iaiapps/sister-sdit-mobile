@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="min-vh-100 d-flex flex-column"
-    style="background: #f0f2f5; --radius-card: 14px; --radius-control: 12px"
-  >
+  <div class="login-container">
     <div class="login-header">
       <div class="logo-wrap">
         <img src="@/assets/img/logo.svg" alt="logo" />
@@ -52,8 +49,7 @@
       </div>
       <button
         v-on:click="login"
-        class="btn btn-success w-100 py-2 fw-bold mt-4"
-        style="border-radius: var(--radius-control)"
+        class="btn btn-brand-success w-100 py-2 fw-bold mt-4 rounded-control"
       >
         MASUK
       </button>
@@ -146,6 +142,11 @@
   cursor: pointer;
   padding: 8px;
   margin-right: -8px;
+}
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>
 

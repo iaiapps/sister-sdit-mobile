@@ -20,7 +20,7 @@
             <span>Info</span>
         </router-link>
 
-        <button v-on:click="logout" class="nav-item" style="border:none;background:none;cursor:pointer;font-family:inherit">
+        <button v-on:click="logout" class="nav-item btn-unstyled">
             <i class="bi bi-box-arrow-right"></i>
             <span>Keluar</span>
         </button>

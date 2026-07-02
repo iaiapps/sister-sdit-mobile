@@ -78,7 +78,7 @@ onMounted(() => {
 .page-header {
   background: white;
   padding: 16px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #e2e8f0;
   height: 61px;
 }
 .page-header h1 {

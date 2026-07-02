@@ -7,8 +7,7 @@
     <div class="content px-3">
       <p
         v-if="loading"
-        class="bg-white p-3 mt-3 text-center"
-        style="border: 1px solid #e2e8f0; border-radius: var(--radius-card)"
+        class="bg-white p-3 mt-3 text-center border-custom-light rounded-card"
       >
         loading data...
       </p>
@@ -53,10 +52,10 @@
           </template>
           <template v-else>
             <div class="text-center p-4">
-              <p v-if="error" class="m-0" style="color: #64748b">
+              <p v-if="error" class="m-0 text-slate">
                 Terjadi kesalahan: {{ error }}
               </p>
-              <p v-else class="m-0" style="color: #64748b">
+              <p v-else class="m-0 text-slate">
                 Data Presensi tidak ditemukan.
               </p>
             </div>
@@ -69,9 +68,7 @@
 
 <style scoped>
 .page-presence {
-  --radius-card: 14px;
   min-height: 100vh;
-  background: #f0f2f5;
   padding-bottom: 70px;
 }
 .table-wrap {
@@ -97,7 +94,7 @@
 .table-wrap td {
   padding: 12px 10px;
   vertical-align: middle;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #e2e8f0;
   color: #334155;
 }
 .table-wrap tr:last-child td {

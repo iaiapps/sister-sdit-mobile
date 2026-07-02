@@ -1,21 +1,21 @@
 <template>
     <div class="page-slip">
-        <div class="bg-white text-center p-3 rounded" style="border: 1px solid #e2e8f0;">
+        <div class="bg-white text-center p-3 rounded-card border-custom-light">
             <h1 class="fs-5 my-0">REKAP SLIP GAJI</h1>
         </div>
-        <div class="bg-white text-center p-3 rounded" style="border: 1px solid #e2e8f0;">
+        <div class="bg-white text-center p-3 rounded-card border-custom-light">
             <label for="date" class="form-label">Pilih Bulan & Tahun </label>
             <div class="row">
                 <div class="col-8">
                     <input v-model="date" type="date" name="date" id="date" class="form-control">
                 </div>
                 <div class="col-4">
-                    <button v-on:click="getData" type="submit" class="btn btn-success w-100">submit</button>
+                    <button v-on:click="getData" type="submit" class="btn btn-brand-success w-100">submit</button>
                 </div>
             </div>
         </div>
 
-        <div v-if="show" class="bg-white p-3 table-responsive rounded" style="border: 1px solid #e2e8f0;">
+        <div v-if="show" class="bg-white p-3 table-responsive rounded-card border-custom-light">
             <div id="printarea">
                 <div class="text-center">
                     <img src="@/assets/img/kop.svg" class="kop mb-2" alt="kop">
@@ -194,14 +194,14 @@
                 </div>
             </div>
         </div>
-        <div v-else class="p-3 bg-white text-center rounded" style="border: 1px solid #e2e8f0;">
+        <div v-else class="p-3 bg-white text-center rounded-card border-custom-light">
             <p class="fs-5 m-0">Data slip gaji belum tersedia</p>
         </div>
     </div>
 </template>
 
 <style scoped>
-.page-slip { min-height: 100vh; background: #f0f2f5; padding: 16px; padding-bottom: 70px; display: flex; flex-direction: column; gap: 12px; }
+.page-slip { min-height: 100vh; padding: 16px; padding-bottom: 70px; display: flex; flex-direction: column; gap: 12px; }
 .twidth {
     width: 80px;
 }

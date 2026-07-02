@@ -145,10 +145,7 @@
 
 <style scoped>
 .page-apps {
-  --radius-card: 14px;
-  --radius-control: 12px;
   min-height: 100vh;
-  background: #f0f2f5;
   padding-bottom: 70px;
 }
 
