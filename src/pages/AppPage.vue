@@ -133,7 +133,7 @@
             <iframe
               v-if="show"
               class="iframee holds-the-iframe"
-              v-bind:src="url"
+              v-bind:src="modalUrl"
               title="modal"
             ></iframe>
           </div>
@@ -256,17 +256,17 @@ const refresh = () => {
   timer();
 };
 
-const url = ref("");
+const modalUrl = ref("");
 const title = ref("");
 const pilih = () => {
   title.value = "Presensi Manual";
-  url.value =
+  modalUrl.value =
     "https://docs.google.com/forms/d/e/1FAIpQLSdh_4CaFf3IxgE-Nz6XYeHCD-RCrRAMecTmR9EuZiSySJTAcw/viewform?usp=sf_link";
 };
 
 const openModal = (menu) => {
   title.value = menu.name.replace(/<br\s*\/?>/gi, " ");
-  url.value = menu.url;
+  modalUrl.value = menu.url;
 };
 
 const openIna = (e) => {

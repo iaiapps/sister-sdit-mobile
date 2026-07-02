@@ -340,7 +340,7 @@ const verifyToken = async () => {
       axiosDefaultHeader();
       const response = await axios.get(`${props.url}/api/verify-token`);
       console.log(response);
-    } catch (error) {
+    } catch {
       console.error("Verifikasi token gagal");
       alert(
         "Anda telah login di perangkat lain. Silakan logout dan login kembali.",
