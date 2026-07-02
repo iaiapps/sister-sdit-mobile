@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-home">
     <!-- Top App Bar -->
     <div class="app-bar">
       <div class="app-bar-left">
@@ -70,10 +70,11 @@
           </svg>
         </div>
         <div class="flex-grow-1">
-          <p class="fs-6 fw-semibold text-dark mb-1">Scan QR untuk Presensi</p>
+          <p class="fs-6 fw-semibold text-dark mb-1">Scan untuk Presensi</p>
           <button
-            class="btn btn-success w-100 rounded-3 py-2 fw-bold"
+            class="btn btn-success w-100 py-2 fw-bold"
             v-on:click="scan()"
+            style="border-radius: var(--radius-control)"
           >
             SCAN QR
           </button>
@@ -136,8 +137,9 @@
         </div>
 
         <button
-          class="btn btn-success w-100 rounded-3 py-2 fw-bold mt-2"
+          class="btn btn-success w-100 py-2 fw-bold mt-2"
           v-on:click="postSelectedItem"
+          style="border-radius: var(--radius-control)"
         >
           KIRIM DATA
         </button>
@@ -147,6 +149,10 @@
 </template>
 
 <style scoped>
+.page-home {
+  --radius-card: 14px;
+  --radius-control: 12px;
+}
 .app-bar {
   background: white;
   padding: 12px 16px;
@@ -184,7 +190,7 @@
 
 .greeting-card {
   background: linear-gradient(135deg, #077944, #0ba360);
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   padding: 20px;
   margin-bottom: 12px;
 }
@@ -212,7 +218,7 @@
   align-items: center;
   gap: 8px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   padding: 10px 12px;
   flex-wrap: wrap;
 }
@@ -256,7 +262,7 @@
 
 .scan-card {
   background: white;
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   border: 1px solid #e2e8f0;
   padding: 24px;
   margin-bottom: 12px;
@@ -268,12 +274,12 @@
   width: 64px;
   height: 64px;
   background: #ecfdf5;
-  border-radius: 18px;
+  border-radius: var(--radius-card);
 }
 
 .absence-card {
   background: white;
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   border: 1px solid #e2e8f0;
   padding: 20px;
   margin-bottom: 12px;
@@ -294,7 +300,7 @@
   width: 100%;
   padding: 12px 14px;
   border: 1.5px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: var(--radius-control);
   font-size: 14px;
   background: #f8fafc;
   margin-bottom: 8px;

@@ -118,9 +118,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.15705191"
-     inkscape:cx="1601.3814"
-     inkscape:cy="331.10072"
+     inkscape:zoom="0.62820764"
+     inkscape:cx="403.529"
+     inkscape:cy="277.7744"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -129,10 +129,10 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1366"
-     inkscape:window-height="732"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-width="1388"
+     inkscape:window-height="836"
+     inkscape:window-x="52"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:pagecheckerboard="0"
      units="in" />
@@ -155,13 +155,14 @@
     <rect
        style="opacity:1;fill:#ffffff;stroke-width:0.754786;stroke-linejoin:round"
        id="rect252"
-       width="185.20833"
+       width="185.20799"
        height="185.20833"
        x="111.68436"
        y="108.02543"
-       inkscape:export-filename="/media/ikrom/Data/aprojectnew/sister-sdit-mobile/src/assets/img/rect252.png"
+       inkscape:export-filename="/opt/lampp/htdocs/sister/sister/sister_sdit_mobile/src/assets/img/rect252.png"
        inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300" />
+       inkscape:export-ydpi="300"
+       ry="0" />
     <g
        id="g92"
        transform="translate(288.33404,-199.51769)">
@@ -342,36 +343,17 @@
        x="118.80774"
        y="-136.56082"
        style="opacity:0.49" />
-    <g
-       id="g3839"
-       transform="matrix(1.4850243,0,0,1.3648527,-114.43757,-70.67374)"
-       inkscape:export-filename="/media/ikrom/Data/aprojectnew/sister-sdit-mobile/src/assets/img/rect252.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300">
-      <path
-         inkscape:export-ydpi="200.03804"
-         inkscape:export-xdpi="200.03804"
-         id="path1011-2"
-         d="M 183.75903,190.27829 H 245.4947"
-         style="fill:#198754;fill-opacity:1;stroke:#198754;stroke-width:5.13257;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:export-ydpi="200.03804"
-         inkscape:export-xdpi="200.03804"
-         id="path3540"
-         d="M 183.75903,207.27864 H 245.4947"
-         style="fill:#198754;fill-opacity:1;stroke:#198754;stroke-width:5.13257;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    </g>
     <path
-       d="m 165.96542,151.71106 c -5.82021,0 -10.59621,4.77631 -10.59621,10.59651 v 16.97597 h 5.75559 v -16.97597 c 0,-2.73119 2.10941,-4.84096 4.84062,-4.84096 h 13.64625 v -5.75555 z m 61.60914,0 v 5.75555 h 15.03709 c 2.73122,0 4.8406,2.10975 4.8406,4.84096 v 16.97597 h 5.75558 v -16.97597 c 0,-5.8202 -4.77598,-10.59651 -10.59618,-10.59651 z m -72.20535,70.26571 v 16.9767 c 0,5.82022 4.776,10.59466 10.59621,10.59466 h 13.64625 v -5.75517 h -13.64625 c -2.73121,0 -4.84062,-2.10829 -4.84062,-4.83949 v -16.9767 z m 92.08304,0 v 16.9767 c 0,2.7312 -2.1094,4.83949 -4.8406,4.83949 h -15.03709 v 5.75517 h 15.03709 c 5.8202,0 10.59618,-4.77444 10.59618,-10.59466 v -16.9767 z"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#333333;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5.75552;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000"
+       d="m 146.60976,127.00403 c -8.7598,0 -15.94799,7.18866 -15.94799,15.94844 v 25.54993 h 8.66254 v -25.54993 c 0,-4.11063 3.1748,-7.28597 7.28545,-7.28597 h 20.53848 v -8.66247 z m 92.72574,0 v 8.66247 h 22.6318 c 4.11067,0 7.28542,3.17531 7.28542,7.28597 v 25.54993 h 8.66252 v -25.54993 c 0,-8.75978 -7.18817,-15.94844 -15.94794,-15.94844 z M 130.66177,232.75848 v 25.55103 c 0,8.75981 7.18819,15.94565 15.94799,15.94565 h 20.53848 v -8.6619 h -20.53848 c -4.11065,0 -7.28545,-3.17311 -7.28545,-7.28375 v -25.55103 z m 138.59095,0 v 25.55103 c 0,4.11064 -3.17478,7.28375 -7.28542,7.28375 h -22.6318 v 8.6619 h 22.6318 c 8.75977,0 15.94794,-7.18584 15.94794,-15.94565 v -25.55103 z"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#333333;fill-opacity:1;fill-rule:nonzero;stroke:#333333;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000"
        id="path63"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"
-       inkscape:export-filename="/media/ikrom/Data/aprojectnew/sister-sdit-mobile/src/assets/img/rect252.png" />
+       inkscape:export-filename="/opt/lampp/htdocs/sister/sister/sister_sdit_mobile/src/assets/img/rect252.png" />
     <g
        id="g3601"
-       transform="matrix(1.5719673,0,0,1.5719673,-133.10028,-113.51086)"
-       inkscape:export-filename="/media/ikrom/Data/aprojectnew/sister-sdit-mobile/src/assets/img/rect252.png"
+       transform="matrix(2.3659127,0,0,2.3659127,-303.5035,-272.17214)"
+       inkscape:export-filename="/opt/lampp/htdocs/sister/sister/sister_sdit_mobile/src/assets/img/rect252.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300">
       <path
@@ -395,8 +377,8 @@
     </g>
     <g
        id="g3577"
-       transform="matrix(1.3513288,0,0,1.3513288,-85.780691,-69.537287)"
-       inkscape:export-filename="/media/ikrom/Data/aprojectnew/sister-sdit-mobile/src/assets/img/rect252.png"
+       transform="matrix(2.0338374,0,0,2.0338374,-232.28445,-205.98907)"
+       inkscape:export-filename="/opt/lampp/htdocs/sister/sister/sister_sdit_mobile/src/assets/img/rect252.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300">
       <path

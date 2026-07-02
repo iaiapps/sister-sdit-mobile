@@ -7,7 +7,7 @@
             v-on:emitLocalData="getLocalData"
         >
         </router-view>
-        <div class="kosong"></div>
+        <div v-if="menu" class="kosong"></div>
         <MenuComponent
             v-if="menu"
             v-bind:localData="localData"
