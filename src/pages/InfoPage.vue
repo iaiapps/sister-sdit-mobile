@@ -8,13 +8,13 @@
             <div class="info-card">
                 <img src="@/assets/img/logo.svg" alt="logo" class="info-logo" />
                 <p><b>Sister Mobile SDIT Harum</b> merupakan kumpulan aplikasi mobile di lingkungan SDIT Harapan Umat Jember</p>
-                <p><a class="btn btn-sm btn-primary" href="https://linksister.sditharum.id">Link</a> website Sister SDIT Harum Jember</p>
-                <p>Jika ada permasalahan terkait aplikasi bisa menghubungi <button v-on:click="send" class="btn btn-success btn-sm">Admin</button></p>
+                <p><a class="btn btn-success btn-sm rounded-3 py-2 fw-bold" href="https://linksister.sditharum.id">Link</a> website Sister SDIT Harum Jember</p>
+                <p>Jika ada permasalahan terkait aplikasi bisa menghubungi <button v-on:click="send" class="btn btn-success btn-sm rounded-3 py-2 fw-bold">Admin</button></p>
             </div>
 
             <div class="schedule-card">
                 <p class="schedule-title">List Jam Presensi</p>
-                <p v-if="loading" class="text-center text-muted small">loading data...</p>
+                <p v-if="loading" class="text-center small" style="color: #64748b;">loading data...</p>
                 <div v-if="show">
                     <div v-if="list">
                         <div class="schedule-item" v-for="(item, index) in data" :key="item.desc">
@@ -22,7 +22,7 @@
                             <span class="value">{{ item.value }}</span>
                         </div>
                     </div>
-                    <div v-else class="text-center"><p class="small text-muted">Server atau Jaringan Bermasalah!</p></div>
+                    <div v-else class="text-center"><p class="small" style="color: #64748b;">Server atau Jaringan Bermasalah!</p></div>
                 </div>
             </div>
 

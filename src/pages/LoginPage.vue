@@ -1,5 +1,5 @@
 <template>
-    <div class="login-page">
+    <div class="min-vh-100 d-flex flex-column" style="background: #f0f2f5;">
         <div class="login-header">
             <div class="logo-wrap"><img src="@/assets/img/logo.svg" alt="logo"></div>
             <h1>SISTER SDIT</h1>
@@ -10,12 +10,12 @@
                 <small>{{ msg }}</small>
                 <button v-on:click="close" type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <label class="form-label">Email</label>
+            <label class="small fw-semibold text-dark mb-1 d-block">Email</label>
             <div class="input-wrap">
                 <i class="bi bi-envelope"></i>
                 <input v-model="email" type="email" placeholder="email@email.com">
             </div>
-            <label class="form-label">Password</label>
+            <label class="small fw-semibold text-dark mb-1 d-block">Password</label>
             <div class="input-wrap">
                 <i class="bi bi-lock"></i>
                 <input v-if="showPassword" type="text" v-model="password">
@@ -24,27 +24,32 @@
                     <i class="bi" :class="{'bi-eye-slash-fill': showPassword, 'bi-eye-fill': !showPassword}"></i>
                 </span>
             </div>
-            <button v-on:click="login" class="btn-login">MASUK</button>
-            <div class="login-version"><VersionComponent/></div>
+            <button v-on:click="login" class="btn btn-success w-100 rounded-3 py-2 fw-bold mt-auto">MASUK</button>
+            <div class="text-center mt-3"><VersionComponent/></div>
         </div>
     </div>
 </template>
 
 <style scoped>
-.login-page {
-    min-height: 100vh;
-    background: #f5f7fa;
-    display: flex;
-    flex-direction: column;
-}
 .login-header {
-    background: linear-gradient(135deg, #077944, #0ba360);
+    background: #077944;
     padding: 48px 28px 36px;
     text-align: center;
+    border-radius: 0 0 28px 28px;
+    position: relative;
+    overflow: hidden;
+}
+.login-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 126'%3E%3Ccircle fill='white' cx='20' cy='30' r='8'/%3E%3Ccircle fill='white' cx='90' cy='50' r='12'/%3E%3Ccircle fill='white' cx='50' cy='100' r='15'/%3E%3Ccircle fill='white' cx='80' cy='20' r='6'/%3E%3Ccircle fill='white' cx='30' cy='80' r='10'/%3E%3C/svg%3E");
+    background-size: cover;
 }
 .logo-wrap {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.2);
@@ -54,14 +59,13 @@
 }
 .logo-wrap img { width: 100%; height: 100%; }
 .login-header h1 {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 800;
     color: white;
-    letter-spacing: -0.3px;
     margin-bottom: 4px;
 }
 .login-header p {
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(255,255,255,0.8);
     margin-bottom: 0;
     line-height: 1.4;
@@ -71,13 +75,6 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-}
-.form-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin-bottom: 6px;
-    display: block;
 }
 .input-wrap {
     background: white;
@@ -102,25 +99,6 @@
 .input-wrap input::placeholder { color: #94a3b8; }
 .input-wrap i { color: #94a3b8; font-size: 18px; margin-right: 10px; }
 .toggle-eye { color: #94a3b8; cursor: pointer; padding: 8px; margin-right: -8px; }
-.btn-login {
-    background: #077944;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 16px;
-    font-size: 16px;
-    font-weight: 700;
-    width: 100%;
-    margin-top: auto;
-    transition: transform 0.15s;
-}
-.btn-login:active { transform: scale(0.98); }
-.login-version {
-    text-align: center;
-    margin-top: 16px;
-    color: #94a3b8;
-    font-size: 12px;
-}
 </style>
 
 <script setup>

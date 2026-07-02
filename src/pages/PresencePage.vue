@@ -5,7 +5,7 @@
         </div>
 
         <div class="content px-3">
-            <p v-if="loading" class="bg-white p-3 mt-3 text-center rounded shadow-sm">loading data...</p>
+            <p v-if="loading" class="bg-white p-3 mt-3 text-center rounded" style="border: 1px solid #e2e8f0;">loading data...</p>
 
             <div v-if="show" class="mt-3">
                 <div class="table-wrap">
@@ -43,8 +43,8 @@
                 </template>
                 <template v-else>
                     <div class="text-center p-4">
-                        <p v-if="error" class="m-0 text-muted">Terjadi kesalahan: {{ error }}</p>
-                        <p v-else class="m-0 text-muted">Data Presensi tidak ditemukan.</p>
+                        <p v-if="error" class="m-0" style="color: #64748b;">Terjadi kesalahan: {{ error }}</p>
+                        <p v-else class="m-0" style="color: #64748b;">Data Presensi tidak ditemukan.</p>
                     </div>
                 </template>
                 </div>

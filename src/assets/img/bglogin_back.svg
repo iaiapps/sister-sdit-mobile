@@ -1311,10 +1311,10 @@
   </defs>
   <sodipodi:namedview
      inkscape:window-maximized="1"
-     inkscape:window-y="27"
-     inkscape:window-x="52"
-     inkscape:window-height="836"
-     inkscape:window-width="1388"
+     inkscape:window-y="32"
+     inkscape:window-x="0"
+     inkscape:window-height="699"
+     inkscape:window-width="1366"
      fit-margin-bottom="0"
      fit-margin-right="0"
      fit-margin-left="0"
@@ -1323,9 +1323,9 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="375.75013"
-     inkscape:cx="136.38338"
-     inkscape:zoom="0.89820327"
+     inkscape:cy="487.50198"
+     inkscape:cx="319.03137"
+     inkscape:zoom="2.5405025"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -1353,7 +1353,7 @@
     <path
        id="path333"
        style="fill:#198754;fill-opacity:1;stroke-width:0.545455;stroke-linecap:round;stroke-linejoin:round"
-       d="m 329.85639,158.27506 h -56.12544 l 0,126.60468 h 56.12544 56.12516 l 0,-126.60468 z"
+       d="m 329.85639,158.27506 h -56.12544 v 110.36865 c 16.98618,10.08004 36.37354,15.39948 56.12544,15.39949 19.75181,-7e-5 39.13907,-5.3195 56.12516,-15.39949 V 158.27506 Z"
        sodipodi:nodetypes="ccccccc" />
     <path
        sodipodi:nodetypes="ccccc"

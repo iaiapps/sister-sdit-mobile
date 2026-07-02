@@ -29,7 +29,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const url = ref("http://149.129.249.117:8000");
+const url = ref("https://sister.sditharum.id/sister");
 
 const localData = ref();
 const getLocalData = () => {
@@ -55,8 +55,19 @@ const checkPageLogin = () => {
     }
 };
 
+const fetchMenus = async () => {
+    try {
+        const res = await fetch(`${url.value}/mobile-menus.json`);
+        const data = await res.json();
+        localStorage.setItem("mobileMenus", JSON.stringify(data));
+    } catch {
+        // fallback di AppPage
+    }
+};
+
 onMounted(() => {
     getLocalData();
     checkPageLogin();
+    fetchMenus();
 });
 </script>
