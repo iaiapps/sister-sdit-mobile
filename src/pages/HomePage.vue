@@ -20,19 +20,29 @@
         </p>
         <div v-if="viewK" class="gps-info">
           <div class="gps-row">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
+            <span class="gps-icon-wrap">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                :stroke="gpsStatus === 'offline' ? '#dc2626' : 'white'"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span
+                v-if="gpsStatus === 'online'"
+                class="dot dot-online"
+              ></span>
+              <span
+                v-if="gpsStatus === 'offline'"
+                class="dot dot-offline"
+              ></span>
+            </span>
             <span class="gps-text"
               >Titik koordinat
               <strong>{{ latitude }}, {{ longitude }}</strong></span
@@ -220,9 +230,28 @@
   padding: 10px 12px;
   flex-wrap: wrap;
 }
-.gps-row svg {
+.gps-icon-wrap {
+  position: relative;
   flex-shrink: 0;
-  color: white;
+  display: inline-flex;
+}
+.gps-icon-wrap svg {
+  display: block;
+}
+.gps-icon-wrap .dot {
+  position: absolute;
+  bottom: -1px;
+  right: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid #0ba360;
+}
+.gps-icon-wrap .dot-online {
+  background: #22c55e;
+}
+.gps-icon-wrap .dot-offline {
+  background: #dc2626;
 }
 .gps-text {
   font-size: 12px;
@@ -313,6 +342,7 @@
 
 <script setup>
 import axios from "axios";
+import { getErrorMessage } from "@/composables/useErrorHandler";
 import TimeComponent from "@/components/TimeComponent.vue";
 import { ref, computed, defineProps, onMounted, onUnmounted } from "vue";
 
@@ -338,16 +368,15 @@ const verifyToken = async () => {
       axiosDefaultHeader();
       const response = await axios.get(`${props.url}/api/verify-token`);
       console.log(response);
-    } catch {
-      console.error("Verifikasi token gagal");
-      alert(
-        "Anda telah login di perangkat lain. Silakan logout dan login kembali.",
-      );
+    } catch (error) {
+      console.error("Verifikasi token gagal", error);
+      alert(getErrorMessage(error));
     }
   }
 };
 
 const viewK = ref(false);
+const gpsStatus = ref('loading');
 const latitude = ref(0);
 const longitude = ref(0);
 const hasil = ref();
@@ -355,7 +384,9 @@ const isWithinScanRadius = ref(false);
 
 const getK = () => {
   viewK.value = false;
+  gpsStatus.value = 'loading';
   const onSuccess = (position) => {
+    gpsStatus.value = 'online';
     latitude.value = position.coords.latitude;
     longitude.value = position.coords.longitude;
     console.log(
@@ -386,6 +417,7 @@ const getK = () => {
     }
   };
   const onError = (error) => {
+    gpsStatus.value = 'offline';
     if (error.code === 1) {
       hasil.value = "Izin lokasi ditolak. Aktifkan GPS.";
     } else if (error.code === 2) {
@@ -438,18 +470,12 @@ const postData = () => {
     })
     .catch((error) => {
       console.log(error.response);
-      if (error.response && error.response.status === 401) {
+      if (error.response?.status === 401) {
         alert(
           "Anda telah login di perangkat lain. Silakan logout dan login kembali.",
         );
-      } else if (
-        error.response &&
-        error.response.data &&
-        error.response.data.pesan
-      ) {
-        alert(error.response.data.pesan);
       } else {
-        alert("Terjadi kesalahan. Silakan coba lagi.");
+        alert(getErrorMessage(error));
       }
     });
 };
@@ -478,7 +504,7 @@ const scan = () => {
     saveHistory: false,
     prompt: "Tempatkan QRCODE pada area tengah scanner",
     resultDisplayDuration: 0,
-    formats: "QR_CODE,EAN_13,DATA_MATRIX",
+    formats: "QR_CODE",
   };
   window.cordova.plugins.barcodeScanner.scan(result, err, options);
 };
@@ -513,18 +539,12 @@ const postSelectedItem = () => {
     })
     .catch((error) => {
       console.log(error.response);
-      if (error.response && error.response.status === 401) {
+      if (error.response?.status === 401) {
         alert(
           "Anda telah login di perangkat lain. Silakan logout dan login kembali.",
         );
-      } else if (
-        error.response &&
-        error.response.data &&
-        error.response.data.pesan
-      ) {
-        alert(error.response.data.pesan);
       } else {
-        alert("Terjadi kesalahan. Silakan coba lagi.");
+        alert(getErrorMessage(error));
       }
     });
 };

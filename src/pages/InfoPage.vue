@@ -48,7 +48,7 @@
           </div>
           <div v-else class="text-center">
             <p class="small text-slate">
-              Server atau Jaringan Bermasalah!
+              {{ errorMsg || "Server atau Jaringan Bermasalah!" }}
             </p>
           </div>
         </div>
@@ -80,6 +80,9 @@
 }
 .info-logo {
   width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border: 2px solid #077944;
   margin-bottom: 12px;
 }
 .info-card p {
@@ -140,6 +143,7 @@
 <script setup>
 import { ref, defineProps, onMounted, onBeforeMount } from "vue";
 import axios from "axios";
+import { getErrorMessage } from "@/composables/useErrorHandler";
 import VersionComponent from "@/components/VersionComponent.vue";
 
 const props = defineProps({
@@ -151,6 +155,7 @@ const loading = ref(true);
 const show = ref();
 const data = ref([]);
 const list = ref();
+const errorMsg = ref("");
 
 const axiosDefaultHeader = () => {
   axios.defaults.headers.common[
@@ -169,6 +174,7 @@ const getData = () => {
     })
     .catch((error) => {
       console.log(error);
+      errorMsg.value = getErrorMessage(error);
     });
 };
 

@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const timeNow = ref();
 const dateNow = ref();
@@ -43,16 +43,20 @@ const time = () => {
 };
 time();
 
-const check = () => {
+const updateStatus = () => {
   status.value = navigator.onLine;
-  window.addEventListener("online", () => {
-    status.value = true;
-  });
-  window.addEventListener("offline", () => {
-    status.value = false;
-  });
 };
-check();
+
+onMounted(() => {
+  updateStatus();
+  document.addEventListener("online", updateStatus);
+  document.addEventListener("offline", updateStatus);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("online", updateStatus);
+  document.removeEventListener("offline", updateStatus);
+});
 </script>
 
 <style scoped>

@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="login-header">
       <div class="logo-wrap">
-        <img src="@/assets/img/logo.svg" alt="logo" />
+        <img src="@/assets/img/logo.svg" alt="logo" class="rounded rounded-3" />
       </div>
       <h1>SISTER SDIT</h1>
       <p>Aplikasi Sister Mobile<br />SDIT Harapan Umat Jember</p>
@@ -154,6 +154,7 @@
 import { ref, defineEmits, defineProps } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { getErrorMessage } from "@/composables/useErrorHandler";
 import VersionComponent from "@/components/VersionComponent.vue";
 
 const showPassword = ref();
@@ -179,20 +180,7 @@ const email = ref();
 const password = ref();
 
 const failed = ref(false);
-const msg = ref();
-const errorCheck = () => {
-  const status = failed.value;
-  if (status === 401) {
-    failed.value = true;
-    msg.value = "Email atau Password Salah !";
-  } else if (status === 0 || status === undefined || status === null) {
-    failed.value = true;
-    msg.value = "Server atau Jaringan Bermasalah , Hubungi Admin !";
-  } else {
-    failed.value = true;
-    msg.value = "Terjadi kesalahan (" + status + "). Hubungi Admin !";
-  }
-};
+const msg = ref("");
 const close = () => {
   failed.value = false;
 };
@@ -218,8 +206,12 @@ const login = () => {
       menu();
     })
     .catch((error) => {
-      failed.value = error.request.status;
-      errorCheck();
+      failed.value = true;
+      if (error.response?.status === 401) {
+        msg.value = "Email atau Password Salah !";
+      } else {
+        msg.value = getErrorMessage(error);
+      }
     });
 };
 </script>

@@ -7,6 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "build:cordova": "vite build && cp -r dist/* ./cordova/www/",
+    "cordova:build": "rm -rf cordova/www && mkdir cordova/www && vite build && cp -r dist/* cordova/www/",
     "lint": "eslint src/"
   },
   "dependencies": {

@@ -195,7 +195,7 @@
             </div>
         </div>
         <div v-else class="p-3 bg-white text-center rounded-card border-custom-light">
-            <p class="fs-5 m-0">Data slip gaji belum tersedia</p>
+            <p class="fs-5 m-0">{{ errorMsg || "Data slip gaji belum tersedia" }}</p>
         </div>
     </div>
 </template>
@@ -227,6 +227,7 @@
 <script setup>
 import { ref, defineProps, onMounted } from 'vue';
 import axios from 'axios';
+import { getErrorMessage } from '@/composables/useErrorHandler';
 
 const props = defineProps({
     url: String,
@@ -245,6 +246,7 @@ const date = ref()
 
 const show = ref()
 const data = ref()
+const errorMsg = ref("")
 
 const checkShow = () => {
     if (data.value == null) {
@@ -260,16 +262,15 @@ const axiosDefaultHeader = () => {
 
 const getData = () => {
     axiosDefaultHeader()
-    // axios.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
     axios.get(`${props.url}/api/salary/${props.localData.teacher_id}?date=${date.value}`)
         .then((result) => {
             data.value = result.data.data;
-            // console.log(data.value);
             checkShow()
         })
         .catch((error) => {
-            console.log(error.response.statusText);
+            console.log(error);
             show.value = false
+            errorMsg.value = getErrorMessage(error, "Gagal memuat data.");
         });
 }
 
