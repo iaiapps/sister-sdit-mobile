@@ -17,17 +17,17 @@
       "android"
     ],
     "plugins": {
-      "phonegap-plugin-barcodescanner": {
-        "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      },
       "cordova-plugin-enable-cleartext-traffic": {},
-      "cordova-plugin-network-information": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-dialogs": {},
       "com.msopentech.authdialog": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
-      }
+      },
+      "cronapp-cordova-plugin-barcodescanner": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
+      "cordova-plugin-network-information": {}
     }
   },
   "devDependencies": {
@@ -38,7 +38,9 @@
     "cordova-plugin-enable-cleartext-traffic": "^2.1.0",
     "cordova-plugin-geolocation": "^5.0.0",
     "cordova-plugin-inappbrowser": "^6.0.0",
-    "cordova-plugin-network-information": "^3.0.0",
-    "phonegap-plugin-barcodescanner": "github:phonegap/phonegap-plugin-barcodescanner"
+    "cronapp-cordova-plugin-barcodescanner": "^4.4.0"
+  },
+  "dependencies": {
+    "cordova-plugin-network-information": "3.1.0"
   }
 }

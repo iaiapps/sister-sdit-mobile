@@ -14,7 +14,7 @@
         <preference name="AndroidInsecureFileModeEnabled" value="true" />
 
         <!-- Needed for Android 11 -->
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splash-square.png"/>
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="assets/res/screen/android/splash-square.png"/>
         <preference name="AndroidWindowSplashScreenBackground" value="#ffffff"/>
 
         <icon density="ldpi" src="assets/res/icon/android/ldpi.png"/>
