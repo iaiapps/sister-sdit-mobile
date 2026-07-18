@@ -21,6 +21,13 @@
 - Dynamic menu from server (Mutabaah, BPI, Substitute Teacher)
 - Online/offline status indicator
 
+## About
+
+**SISTER SDIT Mobile** is an internal attendance application for teachers and staff at SDIT Harapan Umat Jember. Built with Vue 3 and packaged as an Android app using Apache Cordova.
+
+- **Group A (Guru):** Full access — QR scan, manual attendance, Mutabaah, BPI, substitute teacher
+- **Group B (Karyawan):** QR scan & attendance recap only
+
 ## Tech Stack
 
 Vue 3 | Vite 6 | Bootstrap 5 | Axios | Cordova (Android)
