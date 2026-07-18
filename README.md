@@ -25,13 +25,4 @@
 
 Vue 3 | Vite 6 | Bootstrap 5 | Axios | Cordova (Android)
 
-## Getting Started
-
-```bash
-npm install
-npm run dev        # development
-npm run build      # production build
-npm run cordova:build  # build for Android
-```
-
 
