@@ -34,6 +34,4 @@ npm run build      # production build
 npm run cordova:build  # build for Android
 ```
 
-## License
 
-MIT
